@@ -20,133 +20,149 @@ function TitleColored({ children, className }:
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
-      <nav className="flex flex-col sm:flex-row justify-between my-4 pb-4 px-4 gap-2">
-        <BaseButton>
-          <Heart className="w-4 h-4" />
-          lunaperegrina
-        </BaseButton>
-        <BaseButton>
-          <File className="w-4 h-4" />
-          My Projects
-        </BaseButton>
-     
-        <BaseButton>
-          <Contact className="w-4 h-4" />
-          Contact
-        </BaseButton>
-      </nav>
-      {/* <div className="absolute top-full inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_90%,#000_40%,#63e_100%)]"></div> */}
-      {/* <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_90%,#000_40%,#63e_100%)]"></div> */}
-      <div className="flex flex-col justify-center text-center h-[90vh]">
-        <div className="flex flex-row mx-auto gap-4 mb-4">
-          <Image
-            src="/images/icon-luna-apple.png"
-            alt="Luna Peregrina"
-            width={100}
-            height={100}
-            className="border w-12 sm:w-16 h-12 sm:h-16 object-cover rounded-full"
-          />
-          <div className="w-60 sm:w-80 sm:80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border">
-            Hello, I'm Luna Peregrina! 🌙
-          </div>
-        </div>
-        <div className="mx-auto">
-          <div className="flex flex-row justify-center">
-            <TitleColored className="text-purple-500">CLIENT</TitleColored>
-            <div className="text-start flex flex-row items-center ml-4 text-xs sm:text-base">
-              // The best experience
-              <br />
-              always first
-            </div>
-          </div>
-          <div className="flex flex-row justify-center">
-            <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
-              // 📍 Porto Seguro,
-              <br />
-              Bahia, Brasil 🥥🇧🇷
-            </div>
-            <TitleColored className="text-yellow-300">FOCUSED</TitleColored>
-          </div>
-          {/* <div className="text-7xl font-semibold text-yellow-300">FOCUSED</div> */}
-          <div className="flex flex-row justify-center">
-            <div className="text-start flex flex-row items-center mr-4">
-              <TitleColored>FULLSTACK</TitleColored>
-              <button className="p-6 gap-2 rounded-full border flex flex-row items-center h-12 sm:h-16 text-base sm:text-lg">
-                <div className="relative mb-0.5 z-10">
-                  {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
-                  <div className="w-2 h-2 rounded-full mt-0.5 bg-yellow-300 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
-                </div>
-                Soon...
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-row justify-center">
-            <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
-              // Next, Nest, Vue,
-              <br />
-              Python and more!
-            </div>
-            <TitleColored className="text-cyan-300">DEVELOPER</TitleColored>
-          </div>
-        </div>
-        <h2 className="text-base sm:text-3xl font-semibold mt-8 mx-auto text-center w-3/4">
-          Creating software that enhances your experience with <span className="text-cyan-300">productivity</span>, <span className="text-yellow-300">appeal</span>, and <span className="text-purple-500">asthetic</span>.
-        </h2>
-        <div className="flex max-w-7xl mx-auto justify-center px-8 py-4 mt-24">
-          <div className="flex flex-row gap-2">
-            <div className="bg-black w-10 h-10 rounded-full flex justify-center items-center">
-              <a rel="noopener noreferrer" target="_blank" href="https://github.com/lunaperegrina">
-                <Icons.gitHub className="w-7 h-7 text-white" />
-              </a>
-            </div>
-            <div className="bg-black w-10 h-10 rounded-full flex justify-center items-center">
-              <a target="_blank" href="https://www.instagram.com/eitacomoperegrina">
-                <Icons.instagram className="w-7 h-7 text-white" />
-              </a>
-            </div>
-            <div className="bg-black w-10 h-10 rounded-full flex justify-center items-center">
-              <a target="_blank" href="https://www.linkedin.com/in/lunaperegrina">
-                <Icons.linkedin className="w-6 h-6 text-white" />
-              </a>
-            </div>
-            <div className="bg-black w-10 h-10 rounded-full flex justify-center items-center">
-              <a target="_blank" href="https://bsky.app/profile/lunaperegrina.dev">
-                <Icons.bluesky className="w-6 h-6 text-white" />
-              </a>
-            </div>
-          </div>
+    <>
+      <div className="fixed left-0 top-0 -z-10 h-full w-full">
+        <div className="relative h-full w-full bg-stone-950">
+          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         </div>
       </div>
-      {/* <div className="absolute top-full inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_90%,#000_40%,#63e_100%)]"></div> */}
+      <div className="container mx-auto">
+        {/* <nav className="flex flex-col sm:flex-row justify-between my-4 pb-4 px-4 gap-2">
+          <BaseButton>
+            <Heart className="w-4 h-4" />
+            lunaperegrina
+          </BaseButton>
+          <BaseButton>
+            <File className="w-4 h-4" />
+            My Projects
+          </BaseButton>
 
-      <section className="h-[90vh] mx-8">
-        <h2 className="text-2xl sm:text-4xl font-semibold my-16">
-          My Projects on GitHub
-        </h2>
-        <div className="xl:mx-16 grid grid-cols-1 lg:grid-cols-2 gap-8 justify-between">
-          {/* <Project url="lunaperegrina/website-lunaperegrina" /> */}
-          <Project url="lunaperegrina/awesome-bsky" />
-          <Project url="lunaperegrina/twitter-banner-followers" />
-          <Project url="lunaperegrina/bluesky-followers" />
-          <Project url="lunaperegrina/pied-piper" />
-          <Project url="lunaperegrina/tabnews-cli" />
-          <Project url="lunaperegrina/task-manager-cli" />
-        </div>
-      </section>
-      {/* <section className="h-[90vh]">
+          <BaseButton>
+            <Contact className="w-4 h-4" />
+            Contact
+          </BaseButton>
+        </nav> */}
+        <section className="flex flex-col justify-center text-center h-[100vh]">
+          <div className="flex flex-row mx-auto gap-4 mb-4">
+            <Image
+              src="/images/icon-luna-apple.png"
+              alt="Luna Peregrina"
+              width={100}
+              height={100}
+              className="border w-12 sm:w-16 h-12 sm:h-16 object-cover rounded-full"
+            />
+            <div className="w-60 sm:w-80 sm:80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border border-zinc-700">
+              Hello, I'm Luna Peregrina! 🌙
+            </div>
+            {/* <span className="relative inline-block overflow-hidden rounded-full p-[1px]">
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#a9a9a9_0%,#0c0c0c_50%,#a9a9a9_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#171717_0%,#737373_50%,#171717_100%)]" />
+              <div className="inline-flex h-full w-full cursor-pointer justify-center px-6 rounded-full bg-white text-sm sm:text-xl text-slate-600 backdrop-blur-xl dark:bg-slate-950 dark:text-slate-200">
+                Hello, I'm Luna Peregrina! 🌙
+              </div>
+            </span> */}
+          </div>
+          <div className="mx-auto">
+            <div className="flex flex-row justify-center">
+              <TitleColored className="bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-transparent bg-clip-text">CLIENT</TitleColored>
+              <div className="text-start flex flex-row items-center ml-4 text-xs sm:text-base">
+              // The best experience
+                <br />
+                always first
+              </div>
+            </div>
+            <div className="flex flex-row justify-center">
+              <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
+              // 📍 Porto Seguro,
+                <br />
+                Bahia, Brasil 🥥🇧🇷
+              </div>
+              <TitleColored className="bg-gradient-to-r from-green-400 to-yellow-300 text-transparent bg-clip-text">FOCUSED</TitleColored>
+
+            </div>
+            {/* <div className="text-7xl font-semibold text-yellow-300">FOCUSED</div> */}
+            <div className="flex flex-row justify-center">
+              <div className="text-start flex flex-row items-center mr-4">
+                <TitleColored className="bg-gradient-to-r from-fuchsia-500 to-blue-400 text-transparent bg-clip-text">FULLSTACK</TitleColored>
+                <button className="p-6 gap-2 rounded-full border flex flex-row items-center h-12 sm:h-16 text-base sm:text-lg">
+                  <div className="relative mb-0.5 z-10">
+                    {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
+                    <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-300 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
+                  </div>
+                  Soon...
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-row justify-center">
+              <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
+              // Next, Nest, Vue,
+                <br />
+                Python and more!
+              </div>
+              <TitleColored className="bg-gradient-to-r from-red-400 to-yellow-400 text-transparent bg-clip-text">DEVELOPER</TitleColored>
+            </div>
+          </div>
+          <h2 className="text-base sm:text-3xl font-semibold mt-8 mx-auto text-center w-3/4">
+            Creating software that enhances your experience with <span className="bg-gradient-to-r from-cyan-500 to-blue-400 text-transparent bg-clip-text">productivity</span>, <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">appeal</span>, and <span className="bg-gradient-to-r from-fuchsia-500 to-purple-500 text-transparent bg-clip-text">asthetic</span>.
+          </h2>
+          <div className="flex max-w-7xl mx-auto justify-center px-8 py-4">
+            <div className="flex flex-row gap-2">
+              <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
+                <a rel="noopener noreferrer" target="_blank" href="https://github.com/lunaperegrina">
+                  <Icons.gitHub className="w-7 h-7 text-white" />
+                </a>
+              </div>
+              <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
+                <a target="_blank" href="https://www.instagram.com/eitacomoperegrina">
+                  <Icons.instagram className="w-7 h-7 text-white" />
+                </a>
+              </div>
+              <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
+                <a target="_blank" href="https://www.linkedin.com/in/lunaperegrina">
+                  <Icons.linkedin className="w-6 h-6 text-white" />
+                </a>
+              </div>
+              <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
+                <a target="_blank" href="https://twitter.com/lunaperegrinaa">
+                  <Icons.twitter className="w-6 h-6 text-white" />
+                </a>
+              </div>
+              <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
+                <a target="_blank" href="https://bsky.app/profile/lunaperegrina.dev">
+                  <Icons.bluesky className="w-6 h-6 text-white" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* <div className="absolute top-full inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_90%,#000_40%,#63e_100%)]"></div> */}
+
+        <section className="h-[90vh] mx-8">
+          <h2 className="text-2xl sm:text-4xl font-semibold mb-8">
+            My Projects on GitHub
+          </h2>
+          <div className="xl:mx-16 grid grid-cols-1 lg:grid-cols-2 gap-8 justify-between">
+            <Project url="lunaperegrina/task-manager-cli" />
+            <Project url="lunaperegrina/twitter-banner-followers" />
+            <Project url="lunaperegrina/bluesky-followers" />
+            <Project url="lunaperegrina/pied-piper" />
+            <Project url="lunaperegrina/tabnews-cli" />
+            <Project url="lunaperegrina/awesome-bsky" />
+          </div>
+        </section>
+        {/* <section className="h-[90vh]">
         <h2 className="text-base sm:text-4xl font-semibold my-16">
           About Me
         </h2>
       </section> */}
-    </div>
+      </div>
+    </>
   );
 }
 
 async function Project({ url }: { url: string }) {
 
-  let data = await fetch(`https://api.github.com/repos/${url}`)
-  let repo = await data.json()
+  const data = await fetch(`https://api.github.com/repos/${url}`)
+  const repo = await data.json()
 
   return (
     <a href="https://github.com/lunaperegrina/website-lunaperegrina"
@@ -161,7 +177,7 @@ async function Project({ url }: { url: string }) {
             <div className="flex flex-row items-center gap-2">
               {repo.stargazers_count}
               <svg aria-hidden="true" height="16" fill="currentColor" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" className="octicon octicon-star v-align-text-bottom d-inline-block">
-                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
+                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z" />
               </svg>
             </div>
           </div>
@@ -175,12 +191,11 @@ async function Project({ url }: { url: string }) {
           </div>
         </div>
         {repo.description}
-        {/* <img
-          className="rounded-lg mt-2 w-full"
-          src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fdefault-image&psig=AOvVaw3k3DrPCkMOJXUd3IUnTqa7&ust=1733105722421000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKjXg4vAhYoDFQAAAAAdAAAAABAJ"
-          alt="" /> */}
       </div >
+
     </a>
   );
 }
+
+
 
