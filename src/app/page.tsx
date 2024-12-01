@@ -51,7 +51,7 @@ export default function Home() {
               height={100}
               className="border w-12 sm:w-16 h-12 sm:h-16 object-cover rounded-full"
             />
-            <div className="w-60 sm:w-80 sm:80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border border-zinc-700">
+            <div className="w-60 sm:w-80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border border-stone-700">
               Hello, I'm Luna Peregrina! 🌙
             </div>
             {/* <span className="relative inline-block overflow-hidden rounded-full p-[1px]">
@@ -83,10 +83,12 @@ export default function Home() {
             <div className="flex flex-row justify-center">
               <div className="text-start flex flex-row items-center mr-4">
                 <TitleColored className="bg-gradient-to-r from-fuchsia-500 to-blue-400 text-transparent bg-clip-text">FULLSTACK</TitleColored>
-                <button className="p-6 gap-2 rounded-full border flex flex-row items-center h-12 sm:h-16 text-base sm:text-lg">
+                <button 
+                type="button" 
+                className="ml-2 gap-2 rounded-full flex flex-row items-center justify-center w-20 sm:w-32 h-8 sm:h-14 text-xs sm:text-base border-stone-700 border">
                   <div className="relative mb-0.5 z-10">
                     {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
-                    <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-300 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
+                    <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-400 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
                   </div>
                   Soon...
                 </button>
@@ -181,7 +183,7 @@ async function Project({ url }: { url: string }) {
               </svg>
             </div>
           </div>
-          <div className="text-xs sm:text-base flex flex-row gap-2 mt-2">
+          <div className="text-xs sm:text-base flex flex-row flex-wrap gap-2 mt-2">
             {repo.topics?.map((topic: string) => {
               return (
                 <span className="bg-purple-900 px-3 py-1 rounded-full text-xs" key={topic}>{topic.charAt(0).toUpperCase() + topic.slice(1)}</span>
