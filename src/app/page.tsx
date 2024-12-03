@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { File, Contact, Heart } from "lucide-react"
 import { Icons } from "@/components/icons";
+import { MotionDiv, LittleBall } from "@/components/animation";
 
 function BaseButton({ children }: { children: React.ReactNode }) {
   return (
-    <button className="p-3 gap-2 rounded-full border flex flex-row items-center hover:text-purple-500 transition duration-300">
+    <button type="button" className="p-3 gap-2 rounded-full border flex flex-row items-center hover:text-purple-500 transition duration-300">
       {children}
     </button>
   );
@@ -21,6 +22,11 @@ function TitleColored({ children, className }:
 export default function Home() {
   return (
     <>
+      {/* <LittleBall /> */}
+      {/* <MotionDiv initial={{ y: 0, opacity: 1 }} animate={{ y: [0, 0, 0, -1500, -15000], opacity: [1, 1, 1, 0, 0] }} transition={{ duration: 2, times: [0, 0.2, 0.5, 0.8, 1] }}>
+        <div className="absolute z-30 h-screen w-screen bg-black" />
+      </MotionDiv> */}
+
       <div className="fixed left-0 top-0 -z-10 h-full w-full">
         <div className="relative h-full w-full bg-stone-950">
           <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -44,16 +50,21 @@ export default function Home() {
         </nav> */}
         <section className="flex flex-col justify-center text-center h-[100vh]">
           <div className="flex flex-row mx-auto gap-4 mb-4">
-            <Image
-              src="/images/icon-luna-apple.png"
-              alt="Luna Peregrina"
-              width={100}
-              height={100}
-              className="border w-12 sm:w-16 h-12 sm:h-16 object-cover rounded-full"
-            />
-            <div className="w-60 sm:w-80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border border-stone-700">
-              Hello, I'm Luna Peregrina! 🌙
-            </div>
+            <MotionDiv initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, type: "tween" }}>
+              <Image
+                src="/images/icon-luna-apple.png"
+                alt="Luna Peregrina"
+                width={100}
+                height={100}
+                className="border w-12 sm:w-16 h-12 sm:h-16 object-cover rounded-full"
+              />
+            </MotionDiv>
+            <MotionDiv initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <div className="w-60 sm:w-80 h-12 sm:h-16 text-sm sm:text-xl content-center gap-2 text-center rounded-full border border-stone-700">
+                Hello, I'm Luna Peregrina! 🌙
+              </div>
+            </MotionDiv>
+
             {/* <span className="relative inline-block overflow-hidden rounded-full p-[1px]">
               <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#a9a9a9_0%,#0c0c0c_50%,#a9a9a9_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#171717_0%,#737373_50%,#171717_100%)]" />
               <div className="inline-flex h-full w-full cursor-pointer justify-center px-6 rounded-full bg-white text-sm sm:text-xl text-slate-600 backdrop-blur-xl dark:bg-slate-950 dark:text-slate-200">
@@ -62,51 +73,58 @@ export default function Home() {
             </span> */}
           </div>
           <div className="mx-auto">
-            <div className="flex flex-row justify-center">
+            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
               <TitleColored className="bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-transparent bg-clip-text">CLIENT</TitleColored>
-              <div className="text-start flex flex-row items-center ml-4 text-xs sm:text-base">
+              <MotionDiv className="text-start flex flex-row items-center ml-4 text-xs sm:text-base" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
               // The best experience
                 <br />
                 always first
-              </div>
-            </div>
-            <div className="flex flex-row justify-center">
-              <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
+              </MotionDiv>
+            </MotionDiv>
+            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
+              <MotionDiv className="text-start flex flex-row items-center mr-4 text-xs sm:text-base -z-10" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
               // 📍 Porto Seguro,
                 <br />
                 Bahia, Brasil 🥥🇧🇷
-              </div>
+              </MotionDiv>
               <TitleColored className="bg-gradient-to-r from-green-400 to-yellow-300 text-transparent bg-clip-text">FOCUSED</TitleColored>
-
-            </div>
+            </MotionDiv>
             {/* <div className="text-7xl font-semibold text-yellow-300">FOCUSED</div> */}
-            <div className="flex flex-row justify-center">
+            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
               <div className="text-start flex flex-row items-center mr-4">
                 <TitleColored className="bg-gradient-to-r from-fuchsia-500 to-blue-400 text-transparent bg-clip-text">FULLSTACK</TitleColored>
-                <button
-                  type="button"
-                  className="ml-2 gap-2 rounded-full flex flex-row items-center justify-center w-20 sm:w-32 h-8 sm:h-14 text-xs sm:text-base border-stone-700 border">
-                  <div className="relative mb-0.5 z-10">
-                    {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
-                    <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-400 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
-                  </div>
-                  Soon...
-                </button>
+                <MotionDiv initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+                  <button
+                    type="button"
+                    className="ml-2 gap-2 rounded-full flex flex-row items-center justify-center w-20 sm:w-32 h-8 sm:h-14 text-xs sm:text-base border-stone-700 border">
+                    <div className="relative mb-0.5 z-10">
+                      {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
+                      <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-400 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
+                    </div>
+                    Soon...
+                  </button>
+                </MotionDiv>
               </div>
-            </div>
-            <div className="flex flex-row justify-center">
+            </MotionDiv>
+
+            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
               <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">
+                <MotionDiv initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
               // Next, Nest, Vue,
-                <br />
-                Python and more!
+                  <br />
+                  Python and more!
+                </MotionDiv>
               </div>
               <TitleColored className="bg-gradient-to-r from-red-400 to-yellow-400 text-transparent bg-clip-text">DEVELOPER</TitleColored>
-            </div>
+            </MotionDiv>
           </div>
           <h2 className="text-base sm:text-3xl font-semibold mt-8 mx-auto text-center w-3/4">
-            Creating software that enhances your experience with <span className="bg-gradient-to-r from-cyan-500 to-blue-400 text-transparent bg-clip-text">productivity</span>, <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">appeal</span>, and <span className="bg-gradient-to-r from-fuchsia-500 to-purple-500 text-transparent bg-clip-text">asthetic</span>.
+            <MotionDiv initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+              Creating software that enhances your experience with <span className="bg-gradient-to-r from-cyan-500 to-blue-400 text-transparent bg-clip-text">productivity</span>, <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">appeal</span>, and <span className="bg-gradient-to-r from-fuchsia-500 to-purple-500 text-transparent bg-clip-text">asthetic</span>.
+            </MotionDiv>
           </h2>
-          <div className="flex max-w-7xl mx-auto justify-center px-8 py-4">
+          <MotionDiv className="flex max-w-7xl mx-auto justify-center px-8 py-4" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+
             <div className="flex flex-row gap-2">
               <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
                 <a rel="noopener noreferrer" target="_blank" href="https://github.com/lunaperegrina">
@@ -134,7 +152,8 @@ export default function Home() {
                 </a>
               </div>
             </div>
-          </div>
+          </MotionDiv>
+
         </section>
         {/* <div className="absolute top-full inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_90%,#000_40%,#63e_100%)]"></div> */}
 
