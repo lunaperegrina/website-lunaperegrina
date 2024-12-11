@@ -186,7 +186,7 @@ async function Project({ url }: { url: string }) {
   const repo = await data.json()
 
   return (
-    <a href="https://github.com/lunaperegrina/website-lunaperegrina"
+    <a href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer">
       <div className="flex-1 border border-zinc-700 p-4 rounded-lg hover:bg-zinc-800 transition duration-150 ease-out hover:ease-in" >
