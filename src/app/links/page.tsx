@@ -26,11 +26,11 @@ export default function Page() {
           <img src="/images/luna-2.jpg" alt="Luna Peregrina icon" className="rounded-full"
             width={150} />
           <div className="text-center">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-3xl font-bold">
               Luna Peregrina
             </h1>
-            <p>
-              miau miau miau?
+            <p className="my-2">
+              <span className="font-semibold">Full Stack Developer</span> <br /> <span>Next, Nest, Vue, Python, PHP and more!</span>
             </p>
           </div>
         </div>
@@ -49,6 +49,7 @@ export default function Page() {
             <ButtonOfList name="TabNews CLI" link="https://github.com/lunaperegrina/tabnews-cli" />
           </div>
           <div className="flex flex-col gap-4 items-center">
+            <ButtonOfList name="📄 CV 📄" link="/cv-luna-peregrina.pdf" />
             <ButtonOfList name="🔥 NSFW 🔥" link="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
           </div>
         </div>
