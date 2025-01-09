@@ -73,39 +73,39 @@ export default function Home() {
             </span> */}
           </div>
           <div className="mx-auto">
-            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
+            {/* <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}> */}
               <TitleColored className="bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-transparent bg-clip-text">CLIENT</TitleColored>
-              <MotionDiv className="text-start flex flex-row items-center ml-4 text-xs sm:text-base" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+              {/* <MotionDiv className="text-start flex flex-row items-center ml-4 text-xs sm:text-base" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}> */}
               // The best experience
                 <br />
                 always first
-              </MotionDiv>
-            </MotionDiv>
-            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
-              <MotionDiv className="text-start flex flex-row items-center mr-4 text-xs sm:text-base -z-10" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+              {/* </MotionDiv> */}
+            {/* </MotionDiv> */}
+            {/* <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}> */}
+              {/* <MotionDiv className="text-start flex flex-row items-center mr-4 text-xs sm:text-base -z-10" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}> */}
               // 📍 Porto Seguro,
                 <br />
                 Bahia, Brasil 🥥🇧🇷
-              </MotionDiv>
+              {/* </MotionDiv> */}
               <TitleColored className="bg-gradient-to-r from-green-400 to-yellow-300 text-transparent bg-clip-text">FOCUSED</TitleColored>
-            </MotionDiv>
+            {/* </MotionDiv> */}
             {/* <div className="text-7xl font-semibold text-yellow-300">FOCUSED</div> */}
-            <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
+            {/* <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}> */}
               <div className="text-start flex flex-row items-center mr-4">
                 <TitleColored className="bg-gradient-to-r from-fuchsia-500 to-blue-400 text-transparent bg-clip-text">FULLSTACK</TitleColored>
-                <MotionDiv initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}>
+                {/* <MotionDiv initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1, delay: 0.5 }}> */}
                   <button
                     type="button"
                     className="ml-2 gap-2 rounded-full flex flex-row items-center justify-center w-20 sm:w-32 h-8 sm:h-14 text-xs sm:text-base border-stone-700 border">
                     <div className="relative mb-0.5 z-10">
                       {/* <div className="absolute w-2 h-2 rounded-full mt-0.5 bg-stone-400 sm:w-3 sm:h-3 md:h-4 md:w-4 flex items-center justify-center" /> */}
-                      <div className="w-2 h-2 rounded-full mt-0.5 bg-blue-400 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
+                      <div className="w-2 h-2 rounded-full mt-0.5 bg-green-400 sm:w-3 sm:h-3 md:h-4 md:w-4 animate-pulse pulse-slow" />
                     </div>
-                    Soon...
+                    /links
                   </button>
-                </MotionDiv>
+                {/* </MotionDiv> */}
               </div>
-            </MotionDiv>
+            {/* </MotionDiv> */}
 
             <MotionDiv className="flex flex-row justify-center" initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeInOut", bounce: 1 }}>
               <div className="text-start flex flex-row items-center mr-4 text-xs sm:text-base">

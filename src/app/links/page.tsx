@@ -15,13 +15,17 @@ export default function Page() {
 
   return (
     <div>
-      <div className="absolute inset-0">
-        <div className="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]" />
-      </div>
-      {/* <div className="absolute inset-0">
+
+      <div className="fixed left-0 top-0 -z-10 h-full w-full">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]" />
+        </div>
+         {/* <div className="absolute inset-0">
           <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"/>
         </div> */}
-      <div className="container mx-auto flex flex-col gap-4 items-center mt-12">
+      </div>
+     
+      <div className="container mx-auto flex flex-col gap-4 items-center my-20">
         <div className="flex flex-col items-center gap-4">
           <img src="/images/luna-2.jpg" alt="Luna Peregrina icon" className="rounded-full"
             width={150} />
