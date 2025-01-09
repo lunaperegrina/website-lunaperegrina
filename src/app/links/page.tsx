@@ -49,7 +49,8 @@ export default function Page() {
             <ButtonOfList name="TabNews CLI" link="https://github.com/lunaperegrina/tabnews-cli" />
           </div>
           <div className="flex flex-col gap-4 items-center">
-            <ButtonOfList name="📄 CV 📄" link="/cv-luna-peregrina.pdf" />
+            <ButtonOfList name="📄 CV (ENG) 🇺🇸" link="/cv-luna-peregrina-eng.pdf" />
+            <ButtonOfList name="📄 CV (PT) 🇧🇷" link="/cv-luna-peregrina-br.pdf" />
             <ButtonOfList name="🔥 NSFW 🔥" link="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
           </div>
         </div>
