@@ -24,7 +24,7 @@ export default function Page() {
           <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"/>
         </div> */}
       </div>
-     
+
       <div className="container mx-auto flex flex-col gap-4 items-center my-20">
         <div className="flex flex-col items-center gap-4">
           <img src="/images/luna-2.jpg" alt="Luna Peregrina icon" className="rounded-full"
@@ -41,10 +41,10 @@ export default function Page() {
         <div className="flex flex-col gap-8">
           <div className="flex flex-row gap-5">
             <SocialButtons link="https://github.com/lunaperegrina" Icon={<Icons.gitHub className="w-6 h-6 text-white" />} />
-            <SocialButtons link="https://bluesky.app/profile/lunaperegrina.dev" Icon={<Icons.bluesky className="w-6 h-6 text-white" />} />
+            <SocialButtons link="https://bsky.app/profile/lunaperegrina.dev" Icon={<Icons.bluesky className="w-6 h-6 text-white" />} />
             <SocialButtons link="https://twitter.com/lunaperegrinaa" Icon={<Icons.twitter className="w-6 h-6 text-white" />} />
             <SocialButtons link="https://www.linkedin.com/in/lunaperegrina/" Icon={<Icons.linkedin className="w-6 h-6 text-white" />} />
-            <SocialButtons link="https://www.instagram.com/eitacomoperegrina/" Icon={<Icons.instagram className="w-6 h-6 text-white" />} />
+            <SocialButtons link="https://www.instagram.com/lunaperegrinaa/" Icon={<Icons.instagram className="w-6 h-6 text-white" />} />
           </div>
           <div className="flex flex-col gap-4 items-center">
             <h3 className="text-xl">Projects</h3>

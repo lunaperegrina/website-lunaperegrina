@@ -83,7 +83,7 @@ export default function Home() {
                 </a>
               </div>
               <div className="bg-black w-12 h-12 rounded-full flex justify-center items-center transition duration-150 ease-out hover:ease-in hover:-translate-y-1 hover:scale-110">
-                <a target="_blank" href="https://www.instagram.com/eitacomoperegrina" rel="noreferrer">
+                <a target="_blank" href="https://www.instagram.com/lunaperegrinaa" rel="noreferrer">
                   <Icons.instagram className="w-7 h-7 text-white" />
                 </a>
               </div>
