@@ -2,6 +2,12 @@
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
 <header>
@@ -14,15 +20,15 @@ import { SITE } from "@consts";
       </Link>
       <div class="flex flex-row items-center gap-4">
         <nav class="flex gap-1">
-          <Link href="/blog"> blog </Link>
+          <Link href="/blog" active={isActive("/blog")}> blog </Link>
           <span>
             {`/`}
           </span>
-          <Link href="/work"> work </Link>
+          <Link href="/work" active={isActive("/work")}> work </Link>
           <span>
             {`/`}
           </span>
-          <Link href="/projects"> projects </Link>
+          <Link href="/projects" active={isActive("/projects")}> projects </Link>
         </nav>
         <div class="flex justify-end items-center">
           <div class="flex flex-wrap gap-1 items-center">

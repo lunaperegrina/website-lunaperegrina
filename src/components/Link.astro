@@ -3,15 +3,17 @@ type Props = {
   href: string;
   external?: boolean;
   underline?: boolean;
+  active?: boolean;
 };
 
-const { href, external, underline = true, ...rest } = Astro.props;
+const { href, external, underline = true, active = false, ...rest } = Astro.props;
 ---
 
 <a
   href={href}
   target={external ? "_blank" : "_self"}
-  class={`inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 dark:hover:decoration-white/50 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out ${underline && "underline underline-offset-2"}`}
+  aria-current={active ? "page" : undefined}
+  class={`inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 dark:hover:decoration-white/50 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out ${underline && "underline underline-offset-2"} ${active && "text-black dark:text-white decoration-black/25 dark:decoration-white/50"}`}
   {...rest}
 >
   <slot />
