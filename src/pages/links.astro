@@ -1,0 +1,189 @@
+---
+import Container from "@components/Container.astro";
+import { socialIconSvgMap } from "@components/icons";
+import { SITE } from "@consts";
+import LinksLayout from "@layouts/LinksLayout.astro";
+import {
+  otherLinks,
+  projectLinks,
+  recommendLinks,
+  socialLinks,
+  type SocialIcon,
+} from "@lib/links-data";
+
+const title = "Links";
+const description = `All links from ${SITE.NAME} in one page.`;
+
+const socialIconMap = {
+  github: socialIconSvgMap.github,
+  bluesky: socialIconSvgMap.bluesky,
+  twitter: socialIconSvgMap.twitter,
+  linkedin: socialIconSvgMap.linkedin,
+  instagram: socialIconSvgMap.instagram,
+} as const satisfies Record<SocialIcon, string>;
+---
+
+<LinksLayout title={title} description={description}>
+  <Container>
+    <section class="space-y-8">
+      <div class="animate flex flex-col items-center gap-4 text-center">
+        <img
+          width="200"
+          class="rounded-full"
+          src="/luna-peregrina.jpg"
+          alt="Luna Peregrina"
+        />
+        <div class="space-y-2">
+          <h1 class="font-semibold text-black dark:text-white">
+            Luna Peregrina
+          </h1>
+          <p class="font-semibold text-black dark:text-white">
+            Full Stack Developer
+          </p>
+          <p class="text-base">
+            Next, Elysia, React Native, Tanstack Start and more!
+          </p>
+        </div>
+      </div>
+
+      <section class="animate space-y-4">
+        <ul class="flex flex-wrap gap-2 justify-center">
+          {
+            socialLinks.map((social) => {
+              const iconSvg = socialIconMap[social.icon];
+              return (
+                <li>
+                  <a
+                    href={social.href}
+                    aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="relative inline-flex items-center justify-center p-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-stone-900 rounded-lg group"
+                  >
+                    <span class="absolute w-0 h-0 transition-all duration-1000 ease-out  rounded-full group-hover:w-28 group-hover:h-28" />
+                    <span class="relative text-center" set:html={iconSvg} />
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+
+      <!-- <section class="animate space-y-4">
+        <div class="animate font-semibold text-black dark:text-white">
+          Recomendo
+        </div>
+        <ul class="flex flex-col gap-2">
+          {
+            recommendLinks.map((item) => (
+              <li>
+                <a
+                  href={`/${item.href}`}
+                  class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                >
+                  <div class="flex flex-col flex-1 truncate">
+                    <div class="font-semibold">{item.label}</div>
+                    <div class="text-sm">{item.description}</div>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+                  >
+                    <line
+                      x1="5"
+                      y1="12"
+                      x2="19"
+                      y2="12"
+                      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                    />
+                    <polyline
+                      points="12 5 19 12 12 19"
+                      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                    />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section> -->
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Projects</h2>
+        <ul class="flex flex-col gap-2">
+          {
+            projectLinks.map((item) => (
+              <li>
+                <a
+                  href={`/${item.href}`}
+                  class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                >
+                  <div class="flex flex-col flex-1 truncate">
+                    <div class="font-semibold">{item.label}</div>
+                    <div class="text-sm">{item.description}</div>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+                  >
+                    <line
+                      x1="5"
+                      y1="12"
+                      x2="19"
+                      y2="12"
+                      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                    />
+                    <polyline
+                      points="12 5 19 12 12 19"
+                      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                    />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-4">
+        <ul class="flex flex-col gap-2">
+          {
+            otherLinks.map((item) => (
+              <li>
+                <a
+                  href={`/${item.href}`}
+                  class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                >
+                  <div class="flex flex-col flex-1 truncate">
+                    <div class="font-semibold">{item.label}</div>
+                    <div class="text-sm">{item.description}</div>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+                  >
+                    <line
+                      x1="5"
+                      y1="12"
+                      x2="19"
+                      y2="12"
+                      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                    />
+                    <polyline
+                      points="12 5 19 12 12 19"
+                      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                    />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </section>
+  </Container>
+</LinksLayout>
