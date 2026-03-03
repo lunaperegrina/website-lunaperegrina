@@ -20,7 +20,7 @@ const collection = (await getCollection("work")).sort(
       <ul class="flex flex-col">
         {
           collection.map((entry) => (
-            <li class="animate border-b border-black/10 dark:border-white/10 py-4">
+            <li class="animate border-b border-black/10 dark:border-white/10 py-4 last:border-0">
               <div class="text-sm opacity-75">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>

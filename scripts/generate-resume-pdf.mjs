@@ -7,6 +7,8 @@ const resumeTemplatePath = path.join(root, "src/lib/latex/resume.tex");
 const cvDataPath = path.join(root, "src/data/cv-data.json");
 const workDir = path.join(root, "src/content/work");
 const educationDir = path.join(root, "src/content/education");
+const leadershipDir = path.join(root, "src/content/leadership");
+const skillsDir = path.join(root, "src/content/skills");
 const outDir = path.join(root, ".tmp/latex");
 const outTexPath = path.join(outDir, "resume.generated.tex");
 const outPdfPath = path.join(outDir, "resume.generated.pdf");
@@ -177,6 +179,61 @@ function getProfileFromCvDataJson(strict) {
   };
 }
 
+function normalizeLeadershipEntries(entries, strict) {
+  const failOrEmpty = (message) => {
+    if (strict) {
+      throw new Error(message);
+    }
+    console.warn(`[resume] ${message}`);
+    return [];
+  };
+
+  const invalidIndex = entries.findIndex((entry) => {
+    if (!entry || typeof entry !== "object") return true;
+    const required = ["organization", "location", "role", "dateStart", "dateEnd"];
+    const hasInvalidString = required.some((field) => typeof entry[field] !== "string" || entry[field].trim() === "");
+    if (hasInvalidString) return true;
+    if (!Array.isArray(entry.highlights) || entry.highlights.some((item) => typeof item !== "string")) return true;
+    if (!parseDateValue(entry.dateStart)) return true;
+    const endValue = String(entry.dateEnd).trim();
+    if (!/^present$/i.test(endValue) && !/^current$/i.test(endValue) && !parseDateValue(endValue)) return true;
+    return false;
+  });
+
+  if (invalidIndex !== -1) {
+    return failOrEmpty(
+      `Invalid leadership entry at src/content/leadership index ${invalidIndex}. Expected { organization, location, role, dateStart, dateEnd, highlights[] }.`,
+    );
+  }
+
+  return entries;
+}
+
+function normalizeSkillsEntries(entries, strict) {
+  const failOrEmpty = (message) => {
+    if (strict) {
+      throw new Error(message);
+    }
+    console.warn(`[resume] ${message}`);
+    return [];
+  };
+
+  const invalidIndex = entries.findIndex((entry) => {
+    if (!entry || typeof entry !== "object") return true;
+    if (typeof entry.category !== "string" || entry.category.trim() === "") return true;
+    if (!Array.isArray(entry.items) || entry.items.some((item) => typeof item !== "string" || item.trim() === "")) return true;
+    return false;
+  });
+
+  if (invalidIndex !== -1) {
+    return failOrEmpty(
+      `Invalid skills entry at src/content/skills index ${invalidIndex}. Expected { category, items[] }.`,
+    );
+  }
+
+  return entries;
+}
+
 function buildExperienceSection(entries) {
   return entries
     .map((entry) => {
@@ -207,6 +264,35 @@ function buildEducationSection(entries) {
     .join("\n\n");
 }
 
+function buildLeadershipSection(entries) {
+  return entries
+    .map((entry) => {
+      const title = toTexorpdf(entry.organization, entry.location);
+      const subtitle = `\\textit{${escapeLatex(entry.role)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd))}}`;
+      const highlights = Array.isArray(entry.highlights) ? entry.highlights : [];
+      const bullets = highlights
+        .map((item) => `        \\item ${escapeLatex(item)}`)
+        .join("\n");
+
+      return `${title}\n${subtitle}\n    \\begin{itemize}\n${bullets}\n    \\end{itemize}`;
+    })
+    .join("\n\n");
+}
+
+function buildSkillsSection(entries) {
+  if (!entries.length) return "";
+
+  const items = entries
+    .map((entry) => {
+      const list = entry.items.map((value) => escapeLatex(value)).join(", ");
+      const category = entry.category;
+      return `    \\item \\textbf{${escapeLatex(category)}:} ${list}`;
+    })
+    .join("\n");
+
+  return `\\begin{itemize}\n${items}\n\\end{itemize}`;
+}
+
 function buildDocument(strict) {
   const template = readFileSync(resumeTemplatePath, "utf8");
   const beginMarker = "\\begin{document}";
@@ -221,13 +307,21 @@ function buildDocument(strict) {
   const educationEntries = readCollection(educationDir)
     .map((item) => item.data)
     .sort(compareByStartDateDesc);
+  const leadershipEntries = normalizeLeadershipEntries(
+    readCollection(leadershipDir)
+      .map((item) => item.data)
+      .sort(compareByStartDateDesc),
+    strict,
+  );
+  const skillsEntries = normalizeSkillsEntries(
+    readCollection(skillsDir).map((item) => item.data),
+    strict,
+  );
 
   const experienceTex = buildExperienceSection(workEntries);
   const educationTex = buildEducationSection(educationEntries);
-
-  const leadershipTex = `\\subsection*{\\texorpdfstring{\n        \\textbf{Open Source Mentorship Program} \\hfill Remote\n    }{\n        Open Source Mentorship Program -- Remote\n    }}\n\\textit{Volunteer Engineering Mentor \\hfill Jan 2024 - Present}\n    \\begin{itemize}\n        \\item Guided junior developers through production-ready pull requests and architecture reviews.\n        \\item Led weekly office hours on API design and testing strategy for web applications.\n        \\item Helped mentees ship portfolio projects and prepare for technical interviews.\n    \\end{itemize}`;
-
-  const skillsTex = `\\begin{itemize}\n    \\item \\textbf{Technical:} TypeScript, JavaScript, Go, React, Astro, Node.js, PostgreSQL, Docker, Kubernetes, Terraform\n    \\item \\textbf{Language:} Portuguese (Native), English (Fluent), Spanish (Professional Working Proficiency)\n\\end{itemize}`;
+  const leadershipTex = buildLeadershipSection(leadershipEntries);
+  const skillsTex = buildSkillsSection(skillsEntries);
 
   const safeName = escapeLatex(profile.name);
   const safeEmail = escapeLatex(profile.email);

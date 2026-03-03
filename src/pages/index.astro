@@ -31,7 +31,7 @@ const allwork = (await getCollection("work"))
     <h4 class="animate font-semibold text-black dark:text-white">
       Hi, I'm Aru <span class="text-xl">🌌</span>
     </h4>
-    <div class="space-y-16">
+    <div class="space-y-12">
       <section>
         <article class="space-y-4">
           <p class="animate">
@@ -59,14 +59,7 @@ const allwork = (await getCollection("work"))
         </article>
       </section>
 
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say
-            hi, reach out on social media or send me an email.
-          </p>
-        </article>
+      <section class="animate">
         <ul class="flex flex-wrap gap-2">
           {
             SOCIALS.map((SOCIAL) => (
@@ -119,7 +112,7 @@ const allwork = (await getCollection("work"))
         <ul class="flex flex-col space-y-4">
           {
             allwork.map((entry) => (
-              <li>
+              <li class="animate border-b border-black/10 dark:border-white/10 py-4 last:border-0">
                 <div class="text-sm opacity-75">
                   {dateRange(entry.data.dateStart, entry.data.dateEnd)}
                 </div>

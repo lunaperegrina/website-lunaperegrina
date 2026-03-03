@@ -7,23 +7,6 @@
       "TWITTER": "https://twitter.com/lunaperegrinaa",
       "GITHUB": "https://github.com/lunaperegrina",
       "LINKEDIN": "https://www.linkedin.com/in/lunaperegrina"
-    },
-    "SKILLS": {
-      "Technical": [
-        "JavaScript",
-        "TypeScript",
-        "React",
-        "Node.js",
-        "Astro",
-        "GraphQL",
-        "REST APIs",
-        "Git"
-      ],
-      "Languages": [
-        "Portuguese (Native)",
-        "English (Intermediate)",
-        "Spanish (Fluent)"
-      ]
     }
   }
 }

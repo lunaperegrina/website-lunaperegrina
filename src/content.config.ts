@@ -37,6 +37,26 @@ const education = defineCollection({
 	}),
 });
 
+const leadership = defineCollection({
+	type: "content",
+	schema: z.object({
+		organization: z.string(),
+		role: z.string(),
+		location: z.string(),
+		dateStart: z.coerce.date(),
+		dateEnd: z.union([z.coerce.date(), z.string()]),
+		highlights: z.array(z.string()).min(1),
+	}),
+});
+
+const skills = defineCollection({
+	type: "content",
+	schema: z.object({
+		category: z.string(),
+		items: z.array(z.string()).min(1),
+	}),
+});
+
 const projects = defineCollection({
 	type: "content",
 	schema: z.object({
@@ -49,4 +69,4 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { blog, work, education, projects };
+export const collections = { blog, work, education, leadership, skills, projects };
