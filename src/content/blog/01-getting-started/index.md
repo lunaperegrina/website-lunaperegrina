@@ -4,7 +4,7 @@ description: "Hit the ground running."
 date: "Mar 22 2024"
 ---
 
-The basic configuration of Nano is pretty simple.
+The basic configuration of Aru is pretty simple.
 
 Edit `src/consts.ts`
 
@@ -14,7 +14,7 @@ Customize the base site
 // src/consts.ts
 
 export const SITE: Site = {
-  NAME: "Astro Nano",
+  NAME: "Astro Lunar",
   EMAIL: "markhorn.dev@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
@@ -37,7 +37,7 @@ Customize your page metadata
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION: "Astro Aru is a minimal and lightweight blog and portfolio.",
 };
 ```
 

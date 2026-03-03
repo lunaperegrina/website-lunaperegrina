@@ -102,10 +102,10 @@ Use triple `---` to denote a line break.
 Links can be added using the `[title](url)` pattern.
 
 ```md
-Nano was made with [Astro](https://astro.build)
+Aru was made with [Astro](https://astro.build)
 ```
 
-Nano was made with [Astro](https://astro.build)
+Aru was made with [Astro](https://astro.build)
 
 ---
 

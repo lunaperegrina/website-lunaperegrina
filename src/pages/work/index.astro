@@ -17,10 +17,10 @@ const collection = (await getCollection("work")).sort(
       <div class="animate font-semibold text-black dark:text-white">
         Work
       </div>
-      <ul class="flex flex-col space-y-4">
+      <ul class="flex flex-col">
         {
           collection.map((entry) => (
-            <li class="animate">
+            <li class="animate border-b border-black/10 dark:border-white/10 py-4">
               <div class="text-sm opacity-75">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>

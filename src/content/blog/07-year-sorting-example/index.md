@@ -1,6 +1,6 @@
 ---
 title: "Year sorting example"
-description: "Nano groups posts by year."
+description: "Aru groups posts by year."
 date: "12/31/2023"
 ---
 
