@@ -29,6 +29,12 @@ const isActive = (href: string) =>
             {`/`}
           </span>
           <Link href="/projects" active={isActive("/projects")}> projects </Link>
+          <span>
+            {`/`}
+          </span>
+          <Link href="/resume.pdf" underline={false} download>
+            resume pdf
+          </Link>
         </nav>
         <div class="flex justify-end items-center">
           <div class="flex flex-wrap gap-1 items-center">

@@ -24,13 +24,6 @@ const allwork = (await getCollection("work"))
       new Date(a.data.dateStart).valueOf(),
   )
   .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  }),
-);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -134,7 +127,7 @@ const work = await Promise.all(
         </div>
         <ul class="flex flex-col space-y-4">
           {
-            work.map((entry) => (
+            allwork.map((entry) => (
               <li>
                 <div class="text-sm opacity-75">
                   {dateRange(entry.data.dateStart, entry.data.dateEnd)}
@@ -142,10 +135,14 @@ const work = await Promise.all(
                 <div class="font-semibold text-black dark:text-white">
                   {entry.data.company}
                 </div>
-                <div class="text-sm opacity-75">{entry.data.role}</div>
-                <article>
-                  <entry.Content />
-                </article>
+                <div class="text-sm opacity-75">
+                  {entry.data.role} · {entry.data.location}
+                </div>
+                <ul class="mt-2 list-disc pl-5 space-y-1">
+                  {entry.data.highlights.slice(0, 2).map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
               </li>
             ))
           }

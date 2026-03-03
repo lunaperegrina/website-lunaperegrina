@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build:resume": "node scripts/generate-resume-pdf.mjs",
+    "build": "npm run build:resume && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

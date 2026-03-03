@@ -1,9 +1,16 @@
 ---
 company: "Facebook"
-role: "Intern"
-dateStart: "07/01/2019"
-dateEnd: "12/31/2019"
-type: "Full-time"
+role: "Software Engineering Intern"
+location: "Menlo Park, CA"
+dateStart: "2019-07-01"
+dateEnd: "2019-12-31"
+type: "Internship"
+highlights:
+  - "Delivered a React-based admin workflow that shortened content review handling time by 22%."
+  - "Wrote integration tests for a key moderation flow and increased end-to-end test coverage from 61% to 83%."
+  - "Presented performance findings to the infra team and helped remove a query bottleneck affecting peak-hour traffic."
+tools:
+  - "React"
+  - "Jest"
+  - "PHP"
 ---
-
-Iure illo neque tempora, voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor. Sit amet consectetur adipisicing elit.

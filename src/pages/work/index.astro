@@ -9,13 +9,6 @@ const collection = (await getCollection("work")).sort(
   (a, b) =>
     new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf(),
 );
-
-const work = await Promise.all(
-  collection.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  }),
-);
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
@@ -25,8 +18,8 @@ const work = await Promise.all(
         Work
       </div>
       <ul class="flex flex-col space-y-4">
-        { 
-          work.map(entry => (
+        {
+          collection.map((entry) => (
             <li class="animate">
               <div class="text-sm opacity-75">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
@@ -35,11 +28,13 @@ const work = await Promise.all(
                 {entry.data.company}
               </div>
               <div class="text-sm opacity-75">
-                {entry.data.role}
+                {entry.data.role} · {entry.data.location}
               </div>
-              <article>
-                <entry.Content />
-              </article>
+              <ul class="mt-2 list-disc pl-5 space-y-1">
+                {entry.data.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
             </li>
           ))
         }

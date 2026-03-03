@@ -1,9 +1,12 @@
 ---
-company: "McDonalds"
-role: "French Fryer"
-dateStart: "03/16/2018"
-dateEnd: "07/01/2019"
-type: "Full-time"
+company: "McDonald's"
+role: "Crew Member"
+location: "San Jose, CA"
+dateStart: "2018-03-16"
+dateEnd: "2019-07-01"
+type: "Part-time"
+highlights:
+  - "Handled rush-hour operations with consistent service quality, contributing to top quartile customer satisfaction scores in the district."
+  - "Trained 12 new team members on safety and station procedures, reducing onboarding time by two weeks."
+  - "Supported daily inventory checks and waste controls that lowered avoidable food waste by 15%."
 ---
-
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure illo neque tempora, voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum.

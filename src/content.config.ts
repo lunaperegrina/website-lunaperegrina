@@ -1,4 +1,3 @@
-import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
@@ -17,8 +16,24 @@ const work = defineCollection({
 	schema: z.object({
 		company: z.string(),
 		role: z.string(),
+		location: z.string(),
 		dateStart: z.coerce.date(),
 		dateEnd: z.union([z.coerce.date(), z.string()]),
+		type: z.string().optional(),
+		highlights: z.array(z.string()).min(1),
+		tools: z.array(z.string()).optional(),
+	}),
+});
+
+const education = defineCollection({
+	type: "content",
+	schema: z.object({
+		institution: z.string(),
+		degree: z.string(),
+		location: z.string(),
+		dateStart: z.coerce.date(),
+		dateEnd: z.union([z.coerce.date(), z.string()]),
+		highlights: z.array(z.string()).min(1).optional(),
 	}),
 });
 
@@ -34,4 +49,4 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { blog, work, projects };
+export const collections = { blog, work, education, projects };

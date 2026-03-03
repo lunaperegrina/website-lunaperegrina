@@ -1,8 +1,9 @@
 import type { Metadata, Site, Socials } from "@types";
+import cvData from "./data/cv-data.json";
 
 export const SITE: Site = {
-  NAME: "Astro Lunar",
-  EMAIL: "lunaperegrina.contato@proton.me",
+  NAME: cvData.PROFILE.NAME,
+  EMAIL: cvData.PROFILE.EMAIL,
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
@@ -29,17 +30,9 @@ export const PROJECTS: Metadata = {
     "A collection of my projects, with links to repositories and demos.",
 };
 
-export const SOCIALS: Socials = [
-  {
-    NAME: "twitter",
-    HREF: "https://twitter.com/lunaperegrinaa",
-  },
-  {
-    NAME: "github",
-    HREF: "https://github.com/lunaperegrina",
-  },
-  {
-    NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/lunaperegrin",
-  },
-];
+export const SOCIALS: Socials = Array.from(Object.entries(cvData.PROFILE.SOCIALS)).map(([key, value]) => ({
+  NAME: key.toLowerCase(),
+  HREF: value
+}));
+
+export const CV_DATA = cvData;
