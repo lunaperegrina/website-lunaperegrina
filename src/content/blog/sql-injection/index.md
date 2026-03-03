@@ -4,8 +4,6 @@ description: "Entenda como funciona SQL Injection, por que 'DROP DATABASE' não 
 date: "Jun 27 2023"
 ---
 
-# Por que colocaram uma faixa estranha no carro — e por que isso foi genial?
-
 Recentemente viralizou a imagem de um carro com uma faixa contendo a expressão **“DROP DATABASE”**. Pode parecer apenas uma piada técnica, mas existe um motivo muito específico para isso ser interessante.
 
 Essa expressão está relacionada a uma vulnerabilidade chamada **SQL Injection** — uma falha de segurança que ainda existe em muitos sistemas.

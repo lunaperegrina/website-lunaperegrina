@@ -12,7 +12,7 @@ Customize the base site
 
 ```ts 
 // src/consts.ts
-
+  
 export const SITE: Site = {
   NAME: "Astro Lunar",
   EMAIL: "markhorn.dev@gmail.com",
