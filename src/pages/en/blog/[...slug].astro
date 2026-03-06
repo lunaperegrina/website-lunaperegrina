@@ -5,17 +5,19 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import { toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
+import { isEntryInLocale, stripLocalePrefixFromSlug } from "@lib/content-localization";
 import { readingTime } from "@lib/utils";
 
 const locale: Locale = "en";
 const t = useTranslations(locale);
 
 export async function getStaticPaths() {
+  const blogLocale: Locale = "en";
   const posts = (await getCollection("blog"))
-    .filter((post) => !post.data.draft)
+    .filter((post) => !post.data.draft && isEntryInLocale(post.id, blogLocale))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: stripLocalePrefixFromSlug(post.slug, blogLocale) },
     props: post,
   }));
 }

@@ -6,20 +6,21 @@ import Link from "@components/Link.astro";
 import { SITE, SOCIALS } from "@consts";
 import { useTranslations, toLocalizedPath, type Locale } from "@i18n/utils";
 import PageLayout from "@layouts/PageLayout.astro";
+import { isEntryInLocale } from "@lib/content-localization";
 import { dateRange } from "@lib/utils";
 
 const locale: Locale = "pt";
 const t = useTranslations(locale);
 
 const blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
+  .filter((post) => !post.data.draft && isEntryInLocale(post.id, locale))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+// const projects = (await getCollection("projects"))
+//   .filter((project) => !project.data.draft)
+//   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+//   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
 const allwork = (await getCollection("work"))
   .filter((entry) => entry.id.startsWith(`${locale}/`))
@@ -31,10 +32,14 @@ const allwork = (await getCollection("work"))
   .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
 ---
 
-<PageLayout title={t("home.meta.title")} description={t("home.meta.description")} locale={locale}>
+<PageLayout
+  title={t("home.meta.title")}
+  description={t("home.meta.description")}
+  locale={locale}
+>
   <Container>
     <h4 class="animate font-semibold text-black dark:text-white">
-      {t("home.greeting")} <span class="text-xl">🌌</span>
+      {t("home.greeting")}
     </h4>
     <div class="space-y-12">
       <section>
@@ -46,14 +51,7 @@ const allwork = (await getCollection("work"))
             {t("home.intro.2")}
           </p>
           <p class="animate">
-            <Link
-              href="https://github.com/lunaperegrina/astro-aru"
-              aria-label={t("home.astroAruOnGithub")}
-              external
-            >
-              {t("home.astroAruOnGithub")}
-            </Link>
-            . {t("home.intro.3")}
+            {t("home.intro.3")}
           </p>
         </article>
       </section>
@@ -87,8 +85,12 @@ const allwork = (await getCollection("work"))
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">{t("home.latestPosts")}</h5>
-          <Link href={toLocalizedPath(locale, "blog")}> {t("home.seeAllPosts")} </Link>
+          <h5 class="font-semibold text-black dark:text-white">
+            {t("home.latestPosts")}
+          </h5>
+          <Link href={toLocalizedPath(locale, "blog")}>
+            {t("home.seeAllPosts")}
+          </Link>
         </div>
         <ul class="flex flex-col gap-4">
           {
@@ -106,7 +108,9 @@ const allwork = (await getCollection("work"))
           <h5 class="font-semibold text-black dark:text-white">
             {t("home.workExperience")}
           </h5>
-          <Link href={toLocalizedPath(locale, "work")}> {t("home.seeAllWork")} </Link>
+          <Link href={toLocalizedPath(locale, "work")}>
+            {t("home.seeAllWork")}
+          </Link>
         </div>
         <ul class="flex flex-col space-y-4">
           {
@@ -132,7 +136,8 @@ const allwork = (await getCollection("work"))
         </ul>
       </section>
 
-      <section class="animate space-y-6">
+      {
+        /* <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             {t("home.recentProjects")}
@@ -148,7 +153,8 @@ const allwork = (await getCollection("work"))
             ))
           }
         </ul>
-      </section>
+      </section> */
+      }
     </div>
   </Container>
 </PageLayout>

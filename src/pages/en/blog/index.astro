@@ -3,12 +3,13 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getIntlLocale, toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
+import { isEntryInLocale, stripLocalePrefixFromSlug } from "@lib/content-localization";
 
 const locale: Locale = "en";
 const t = useTranslations(locale);
 
 const data = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
+  .filter((post) => !post.data.draft && isEntryInLocale(post.id, locale))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 type Acc = {
@@ -55,7 +56,7 @@ const formatDayMonth = (date: Date) =>
                       {index === 0 ? year : ""}
                     </div>
                     <a
-                      href={toLocalizedPath(locale, `blog/${post.slug}`)}
+                      href={toLocalizedPath(locale, `blog/${stripLocalePrefixFromSlug(post.slug, locale)}`)}
                       class="font-medium leading-tight text-black transition-colors hover:text-black/70 dark:text-white dark:hover:text-white/70"
                     >
                       {post.data.title}
