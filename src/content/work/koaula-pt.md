@@ -1,0 +1,27 @@
+---
+locale: "pt"
+company: "Koaula"
+role: "Full Stack Web & Mobile Developer"
+location: "Remoto"
+dateStart: "2025-10-01"
+dateEnd: "Atual"
+type: "Tempo integral"
+highlights:
+  - "Desenvolvimento e evolucao de aplicacoes web focadas em banco de questoes, priorizando performance e escalabilidade."
+  - "Implementacao de APIs REST/HTTP com Hono, estruturando camadas de controller/service e aplicando validacoes e autenticacao."
+  - "Modelagem e manutencao de banco de dados relacional com DrizzleORM e PostgreSQL, incluindo criacao de migrations e otimizacao de queries."
+  - "Construcao de interfaces responsivas e reutilizaveis, organizando componentes e padronizando o design system."
+  - "Implementacao de fluxos criticos do produto, como cadastro, onboarding, dashboards e jornada do usuario."
+  - "Atuacao em melhorias de performance com reducao de tempo de carregamento, otimizacao de queries e implementacao de embeddings no Meilisearch."
+  - "Participacao ativa em decisoes tecnicas, code reviews e organizacao do backlog."
+tools:
+  - "TypeScript"
+  - "React Native"
+  - "Compositor"
+  - "TanStack Start"
+  - "DrizzleORM"
+  - "PostgreSQL"
+  - "Meilisearch"
+  - "Hono"
+  - "Better Auth"
+---

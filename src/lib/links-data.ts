@@ -86,12 +86,12 @@ export const projectLinks: LinkItem[] = [
 export const otherLinks: LinkItem[] = [
   {
     label: "📄 CV (ENG) 🇺🇸",
-    href: "/resume.pdf",
+    href: "/luna-peregrina-cv-en.pdf",
     external: false,
   },
   {
     label: "📄 CV (PT) 🇧🇷",
-    href: "/resume.pdf",
+    href: "/luna-peregrina-cv-pt.pdf",
     external: false,
   },
   // {

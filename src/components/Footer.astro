@@ -1,13 +1,21 @@
 ---
 import BackToTop from "@components/BackToTop.astro";
 import Container from "@components/Container.astro";
+import { useTranslations, type Locale } from "@i18n/utils";
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <footer class="animate">
   <Container>
     <div class="relative">
       <div class="absolute right-0 -top-20">
-        <BackToTop />
+        <BackToTop label={t("common.backToTop")} />
       </div>
     </div>
   </Container>

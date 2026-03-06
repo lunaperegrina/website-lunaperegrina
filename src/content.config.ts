@@ -14,6 +14,7 @@ const blog = defineCollection({
 const work = defineCollection({
 	type: "content",
 	schema: z.object({
+		locale: z.enum(["pt", "en"]),
 		company: z.string(),
 		role: z.string(),
 		location: z.string(),

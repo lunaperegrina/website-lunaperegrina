@@ -1,9 +1,11 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import { BLOG } from "@consts";
-import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { getIntlLocale, toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
+
+const locale: Locale = "en";
+const t = useTranslations(locale);
 
 const data = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -27,18 +29,18 @@ const years = Object.keys(posts).sort(
 );
 
 const formatDayMonth = (date: Date) =>
-  new Intl.DateTimeFormat("pt-BR", {
+  new Intl.DateTimeFormat(getIntlLocale(locale), {
     day: "2-digit",
     month: "2-digit",
   }).format(date);
 ---
 
-<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+<PageLayout title={t("blog.meta.title")} description={t("blog.meta.description")} locale={locale}>
   <Container>
     <section>
       <div class="animate flex items-center justify-between gap-4 pb-10">
         <h1 class="font-semibold tracking-tight text-black dark:text-white">
-          Blog
+          {t("blog.heading")}
         </h1>
       </div>
 
@@ -53,7 +55,7 @@ const formatDayMonth = (date: Date) =>
                       {index === 0 ? year : ""}
                     </div>
                     <a
-                      href={`/blog/${post.slug}`}
+                      href={toLocalizedPath(locale, `blog/${post.slug}`)}
                       class="font-medium leading-tight text-black transition-colors hover:text-black/70 dark:text-white dark:hover:text-white/70"
                     >
                       {post.data.title}

@@ -1,0 +1,28 @@
+---
+locale: "en"
+company: "Gled International Education"
+role: "Full-Stack Web Developer"
+location: "Remote"
+dateStart: "2025-02-01"
+dateEnd: "2025-10-01"
+type: "Full-time"
+highlights:
+  - "Developed and maintained modern web applications using Next.js (App Router) and TypeScript, ensuring high performance and scalability."
+  - "Built robust and efficient APIs with NestJS and Fastify, following best practices for maintainable, high-quality code."
+  - "Implemented responsive and accessible interfaces with Shadcn/ui, integrating reusable components and a consistent design system."
+  - "Managed data with Prisma ORM across relational (PostgreSQL) and non-relational (MongoDB) databases, optimizing queries and data models."
+  - "Integrated Moodle through custom APIs for e-learning features such as unified authentication and course management."
+  - "Collaborated in agile teams (Scrum/Kanban), using Git for version control and CI/CD practices."
+  - "Solved complex full-stack performance and debugging issues across frontend and backend environments."
+tools:
+  - "TypeScript"
+  - "Next.js"
+  - "NestJS"
+  - "Elysia"
+  - "Fastify"
+  - "Shadcn/ui"
+  - "Prisma"
+  - "MongoDB"
+  - "PostgreSQL"
+  - "Moodle"
+---

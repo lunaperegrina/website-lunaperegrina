@@ -1,18 +1,53 @@
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const root = process.cwd();
 const resumeTemplatePath = path.join(root, "src/lib/latex/resume.tex");
+const curriculoTemplatePath = path.join(root, "src/lib/latex/curriculo.tex");
 const cvDataPath = path.join(root, "src/data/cv-data.json");
 const workDir = path.join(root, "src/content/work");
 const educationDir = path.join(root, "src/content/education");
 const leadershipDir = path.join(root, "src/content/leadership");
 const skillsDir = path.join(root, "src/content/skills");
-const outDir = path.join(root, ".tmp/latex");
-const outTexPath = path.join(outDir, "resume.generated.tex");
-const outPdfPath = path.join(outDir, "resume.generated.pdf");
-const publicPdfPath = path.join(root, "public/resume.pdf");
+const outBaseDir = path.join(root, ".tmp/latex");
+
+const pdfVariants = [
+  {
+    id: "en",
+    templatePath: resumeTemplatePath,
+    outputPdfPath: path.join(root, "public/luna-peregrina-cv-en.pdf"),
+    dateLocale: "en-US",
+    presentLabel: "Present",
+    sections: {
+      leadership: "Leadership Activities",
+      experience: "Experience",
+      skills: "Skills",
+      education: "Education",
+    },
+  },
+  {
+    id: "pt",
+    templatePath: curriculoTemplatePath,
+    outputPdfPath: path.join(root, "public/luna-peregrina-cv-pt.pdf"),
+    dateLocale: "pt-BR",
+    presentLabel: "Atual",
+    sections: {
+      leadership: "Atividades de Liderança",
+      experience: "Experiência",
+      skills: "Habilidades",
+      education: "Educação",
+    },
+  },
+];
 
 function hasCommand(command) {
   const result = spawnSync("sh", ["-c", `command -v ${command}`], { stdio: "pipe" });
@@ -76,7 +111,7 @@ function readCollection(dir) {
 function parseDateValue(value) {
   if (!value) return null;
   const text = String(value).trim();
-  if (/^current$/i.test(text) || /^present$/i.test(text)) return null;
+  if (/^current$/i.test(text) || /^present$/i.test(text) || /^atual$/i.test(text)) return null;
   const d = new Date(text);
   return Number.isNaN(d.getTime()) ? null : d;
 }
@@ -89,14 +124,14 @@ function compareByStartDateDesc(a, b) {
   return bMs - aMs;
 }
 
-function formatMonthYear(value) {
+function formatMonthYear(value, variant) {
   const date = parseDateValue(value);
-  if (!date) return "Present";
-  return new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(date);
+  if (!date) return variant.presentLabel;
+  return new Intl.DateTimeFormat(variant.dateLocale, { month: "short", year: "numeric" }).format(date);
 }
 
-function formatDateRange(start, end) {
-  return `${formatMonthYear(start)} - ${formatMonthYear(end)}`;
+function formatDateRange(start, end, variant) {
+  return `${formatMonthYear(start, variant)} - ${formatMonthYear(end, variant)}`;
 }
 
 function escapeLatex(value) {
@@ -196,7 +231,7 @@ function normalizeLeadershipEntries(entries, strict) {
     if (!Array.isArray(entry.highlights) || entry.highlights.some((item) => typeof item !== "string")) return true;
     if (!parseDateValue(entry.dateStart)) return true;
     const endValue = String(entry.dateEnd).trim();
-    if (!/^present$/i.test(endValue) && !/^current$/i.test(endValue) && !parseDateValue(endValue)) return true;
+    if (!/^present$/i.test(endValue) && !/^current$/i.test(endValue) && !/^atual$/i.test(endValue) && !parseDateValue(endValue)) return true;
     return false;
   });
 
@@ -234,11 +269,11 @@ function normalizeSkillsEntries(entries, strict) {
   return entries;
 }
 
-function buildExperienceSection(entries) {
+function buildExperienceSection(entries, variant) {
   return entries
     .map((entry) => {
       const title = toTexorpdf(entry.company, entry.location);
-      const subtitle = `\\textit{${escapeLatex(entry.role)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd))}}`;
+      const subtitle = `\\textit{${escapeLatex(entry.role)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd, variant))}}`;
       const highlights = Array.isArray(entry.highlights) ? entry.highlights : [];
       const bullets = highlights
         .map((item) => `        \\item ${escapeLatex(item)}`)
@@ -249,11 +284,11 @@ function buildExperienceSection(entries) {
     .join("\n\n");
 }
 
-function buildEducationSection(entries) {
+function buildEducationSection(entries, variant) {
   return entries
     .map((entry) => {
       const title = toTexorpdf(entry.institution, entry.location);
-      const subtitle = `\\textit{${escapeLatex(entry.degree)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd))}}`;
+      const subtitle = `\\textit{${escapeLatex(entry.degree)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd, variant))}}`;
       const highlights = Array.isArray(entry.highlights) ? entry.highlights : [];
       const bullets = highlights.length
         ? `\n    \\begin{itemize}\n${highlights.map((item) => `        \\item ${escapeLatex(item)}`).join("\n")}\n    \\end{itemize}`
@@ -264,11 +299,11 @@ function buildEducationSection(entries) {
     .join("\n\n");
 }
 
-function buildLeadershipSection(entries) {
+function buildLeadershipSection(entries, variant) {
   return entries
     .map((entry) => {
       const title = toTexorpdf(entry.organization, entry.location);
-      const subtitle = `\\textit{${escapeLatex(entry.role)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd))}}`;
+      const subtitle = `\\textit{${escapeLatex(entry.role)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd, variant))}}`;
       const highlights = Array.isArray(entry.highlights) ? entry.highlights : [];
       const bullets = highlights
         .map((item) => `        \\item ${escapeLatex(item)}`)
@@ -293,8 +328,12 @@ function buildSkillsSection(entries) {
   return `\\begin{itemize}\n${items}\n\\end{itemize}`;
 }
 
-function buildDocument(strict) {
-  const template = readFileSync(resumeTemplatePath, "utf8");
+function buildDocument(strict, variant) {
+  if (!existsSync(variant.templatePath)) {
+    throw new Error(`LaTeX template not found at ${variant.templatePath}`);
+  }
+
+  const template = readFileSync(variant.templatePath, "utf8");
   const beginMarker = "\\begin{document}";
   const preamble = template.includes(beginMarker)
     ? template.slice(0, template.indexOf(beginMarker))
@@ -303,6 +342,7 @@ function buildDocument(strict) {
   const profile = getProfileFromCvDataJson(strict);
   const workEntries = readCollection(workDir)
     .map((item) => item.data)
+    .filter((entry) => entry.locale === variant.id)
     .sort(compareByStartDateDesc);
   const educationEntries = readCollection(educationDir)
     .map((item) => item.data)
@@ -318,9 +358,9 @@ function buildDocument(strict) {
     strict,
   );
 
-  const experienceTex = buildExperienceSection(workEntries);
-  const educationTex = buildEducationSection(educationEntries);
-  const leadershipTex = buildLeadershipSection(leadershipEntries);
+  const experienceTex = buildExperienceSection(workEntries, variant);
+  const educationTex = buildEducationSection(educationEntries, variant);
+  const leadershipTex = buildLeadershipSection(leadershipEntries, variant);
   const skillsTex = buildSkillsSection(skillsEntries);
 
   const safeName = escapeLatex(profile.name);
@@ -349,20 +389,56 @@ function buildDocument(strict) {
     \\href{${safeGithubUrl}}{${safeGithubLabel}}
 \\end{center}
 
-\\section{Leadership Activities}
+\\section{${variant.sections.leadership}}
 ${leadershipTex}
 
-\\section{Experience}
+\\section{${variant.sections.experience}}
 ${experienceTex}
 
-\\section{Skills}
+\\section{${variant.sections.skills}}
 ${skillsTex}
 
-\\section{Education}
+\\section{${variant.sections.education}}
 ${educationTex}
 
 \\end{document}
 `;
+}
+
+function compileLatex(compiler, outDir, texPath) {
+  return compiler === "pdflatex"
+    ? spawnSync(
+      "pdflatex",
+      ["-interaction=nonstopmode", "-halt-on-error", "-output-directory", outDir, texPath],
+      { stdio: "pipe", encoding: "utf8" },
+    )
+    : spawnSync("tectonic", ["--outdir", outDir, texPath], { stdio: "pipe", encoding: "utf8" });
+}
+
+function generateVariantPdf(variant, compiler, strict) {
+  const outDir = path.join(outBaseDir, variant.id);
+  const outTexPath = path.join(outDir, `${variant.id}.generated.tex`);
+  const outPdfPath = path.join(outDir, `${variant.id}.generated.pdf`);
+
+  rmSync(outDir, { recursive: true, force: true });
+  mkdirSync(outDir, { recursive: true });
+
+  const tex = buildDocument(strict, variant);
+  writeFileSync(outTexPath, tex, "utf8");
+
+  const compile = compileLatex(compiler, outDir, outTexPath);
+
+  if (compile.status !== 0) {
+    throw new Error(`${compiler} failed for ${variant.id}:\n${compile.stdout}\n${compile.stderr}`);
+  }
+
+  if (!existsSync(outPdfPath)) {
+    throw new Error(`Expected PDF output not found at ${outPdfPath}`);
+  }
+
+  mkdirSync(path.dirname(variant.outputPdfPath), { recursive: true });
+  copyFileSync(outPdfPath, variant.outputPdfPath);
+  console.log(`Generated ${variant.outputPdfPath}`);
 }
 
 function main() {
@@ -370,7 +446,7 @@ function main() {
   const compiler = hasCommand("pdflatex") ? "pdflatex" : hasCommand("tectonic") ? "tectonic" : null;
   if (!compiler) {
     const message =
-      "Missing LaTeX compiler in PATH. Install pdflatex (MacTeX/TeX Live) or tectonic to generate public/resume.pdf.";
+      "Missing LaTeX compiler in PATH. Install pdflatex (MacTeX/TeX Live) or tectonic to generate localized resume PDFs.";
     if (strict) {
       throw new Error(message);
     }
@@ -379,32 +455,12 @@ function main() {
     return;
   }
 
-  rmSync(outDir, { recursive: true, force: true });
-  mkdirSync(outDir, { recursive: true });
+  rmSync(outBaseDir, { recursive: true, force: true });
+  mkdirSync(outBaseDir, { recursive: true });
 
-  const tex = buildDocument(strict);
-  writeFileSync(outTexPath, tex, "utf8");
-
-  const compile =
-    compiler === "pdflatex"
-      ? spawnSync(
-        "pdflatex",
-        ["-interaction=nonstopmode", "-halt-on-error", "-output-directory", outDir, outTexPath],
-        { stdio: "pipe", encoding: "utf8" },
-      )
-      : spawnSync("tectonic", ["--outdir", outDir, outTexPath], { stdio: "pipe", encoding: "utf8" });
-
-  if (compile.status !== 0) {
-    throw new Error(`${compiler} failed:\n${compile.stdout}\n${compile.stderr}`);
+  for (const variant of pdfVariants) {
+    generateVariantPdf(variant, compiler, strict);
   }
-
-  if (!existsSync(outPdfPath)) {
-    throw new Error(`Expected PDF output not found at ${outPdfPath}`);
-  }
-
-  mkdirSync(path.dirname(publicPdfPath), { recursive: true });
-  copyFileSync(outPdfPath, publicPdfPath);
-  console.log(`Generated ${publicPdfPath}`);
 }
 
 main();

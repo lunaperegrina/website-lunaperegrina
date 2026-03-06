@@ -1,6 +1,9 @@
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
-import { HOME } from "@consts";
+import { toLocalizedPath, useTranslations } from "@i18n/utils";
+
+const locale = "pt" as const;
+const t = useTranslations(locale);
 
 type Context = {
   site: string;
@@ -8,7 +11,6 @@ type Context = {
 
 export async function GET(context: Context) {
   const blog = (await getCollection("blog")).filter((post) => !post.data.draft);
-
   const projects = (await getCollection("projects")).filter(
     (project) => !project.data.draft,
   );
@@ -18,14 +20,14 @@ export async function GET(context: Context) {
   );
 
   return rss({
-    title: HOME.TITLE,
-    description: HOME.DESCRIPTION,
+    title: t("rss.title"),
+    description: t("rss.description"),
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,
       description: item.data.description,
       pubDate: item.data.date,
-      link: `/${item.collection}/${item.slug}/`,
+      link: toLocalizedPath(locale, `${item.collection}/${item.slug}`),
     })),
   });
 }

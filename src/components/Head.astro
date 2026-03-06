@@ -11,16 +11,19 @@ import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
+import { toLocalizedPath, type Locale } from "@i18n/utils";
 
 interface Props {
   title: string;
   description: string;
+  locale: Locale;
   image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/nano.png" } = Astro.props;
+const { title, description, locale, image = "/nano.png" } = Astro.props;
+const localizedRssPath = toLocalizedPath(locale, "rss.xml");
 ---
 
 <!-- Global Metadata -->
@@ -62,7 +65,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <ClientRouter  />
 
 <!-- RSS Link -->
-<link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
+<link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL(localizedRssPath, Astro.site)} />
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";

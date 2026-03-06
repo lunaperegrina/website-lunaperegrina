@@ -1,46 +1,88 @@
 ---
-import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import Container from "@components/Container.astro";
 import { SITE } from "@consts";
+import {
+  getPathWithoutLocale,
+  getResumePath,
+  getSwitchLocalePath,
+  toLocalizedPath,
+  useTranslations,
+  type Locale,
+} from "@i18n/utils";
 
-const pathname = Astro.url.pathname;
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const pathnameWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+
 const isActive = (href: string) =>
-  href === "/"
-    ? pathname === "/"
-    : pathname === href || pathname.startsWith(`${href}/`);
+  href === ""
+    ? pathnameWithoutLocale === ""
+    : pathnameWithoutLocale === href ||
+      pathnameWithoutLocale.startsWith(`${href}/`);
+
+const resumePath = getResumePath(locale);
 ---
 
 <header>
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between items-center">
-      <Link href="/" underline={false}>
+      <Link href={toLocalizedPath(locale)} underline={false}>
         <div class="font-semibold">
           {SITE.NAME}
         </div>
       </Link>
       <div class="flex flex-row items-center gap-4">
         <nav class="flex gap-1">
-          <Link href="/blog" active={isActive("/blog")}> blog </Link>
+          <Link href={toLocalizedPath(locale, "blog")} active={isActive("blog")}> {t("nav.blog")} </Link>
           <span>
             {`/`}
           </span>
-          <Link href="/work" active={isActive("/work")}> work </Link>
+          <Link href={toLocalizedPath(locale, "work")} active={isActive("work")}> {t("nav.work")} </Link>
           <span>
             {`/`}
           </span>
-          <Link href="/projects" active={isActive("/projects")}> projects </Link>
+          <Link href={toLocalizedPath(locale, "projects")} active={isActive("projects")}>
+            {t("nav.projects")}
+          </Link>
           <span>
             {`/`}
           </span>
-          <Link href="/resume.pdf" download>
-            resume.pdf
+          <Link href={resumePath} download>
+            {t("nav.resume")}
           </Link>
         </nav>
+
+        <nav class="flex items-center gap-1" aria-label={t("nav.language")}>
+          <Link
+            href={getSwitchLocalePath(Astro.url, "en")}
+            active={locale === "en"}
+            underline={false}
+            aria-label={`${t("nav.language")}: ${t("lang.en")}`}
+          >
+            {t("lang.en")}
+          </Link>
+          <span>/</span>
+          <Link
+            href={getSwitchLocalePath(Astro.url, "pt")}
+            active={locale === "pt"}
+            underline={false}
+            aria-label={`${t("nav.language")}: ${t("lang.pt")}`}
+          >
+            {t("lang.pt")}
+          </Link>
+        </nav>
+
         <div class="flex justify-end items-center">
           <div class="flex flex-wrap gap-1 items-center">
             <button
               id="toggle-theme-button"
-              aria-label="Light theme"
+              aria-label={t("nav.themeToggle")}
               class="group size-8 flex items-center justify-center rounded-full cursor-pointer"
             >
               <svg
