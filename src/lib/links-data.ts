@@ -32,7 +32,7 @@ export const socialLinks: SocialLinkItem[] = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/lunaperegrina/",
+    href: "https://linkedin.com/in/lunaperegrina/",
     external: true,
     icon: "linkedin",
   },

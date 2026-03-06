@@ -190,7 +190,7 @@ function getProfileFromCvDataJson(strict) {
       name: "Astro Lunar",
       email: "your.email@example.com",
       location: "Your City, Your Country",
-      linkedin: "https://www.linkedin.com/in/yourprofile",
+      linkedin: "https://linkedin.com/in/yourprofile",
       github: "https://github.com/yourprofile",
     },
     cvSections: { ...defaultCvSections },
