@@ -1,5 +1,4 @@
 ---
-locale: "en"
 company: "Koaula"
 role: "Full Stack Web & Mobile Developer"
 location: "Remote"

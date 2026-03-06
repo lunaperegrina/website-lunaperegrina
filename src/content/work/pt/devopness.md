@@ -1,5 +1,4 @@
 ---
-locale: "pt"
 company: "devopness"
 role: "Front-End Web Developer"
 location: "Remoto"

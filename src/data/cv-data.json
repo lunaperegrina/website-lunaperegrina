@@ -8,5 +8,11 @@
       "GITHUB": "https://github.com/lunaperegrina",
       "LINKEDIN": "https://www.linkedin.com/in/lunaperegrina"
     }
+  },
+  "CV_SECTIONS": {
+    "leadership": false,
+    "experience": true,
+    "skills": true,
+    "education": false
   }
 }

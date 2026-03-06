@@ -49,6 +49,13 @@ const pdfVariants = [
   },
 ];
 
+const defaultCvSections = {
+  leadership: true,
+  experience: true,
+  skills: true,
+  education: true,
+};
+
 function hasCommand(command) {
   const result = spawnSync("sh", ["-c", `command -v ${command}`], { stdio: "pipe" });
   return result.status === 0;
@@ -99,13 +106,24 @@ function parseFrontmatter(fileContent) {
 function readCollection(dir) {
   if (!existsSync(dir)) return [];
 
-  return readdirSync(dir)
-    .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
-    .map((name) => {
-      const fullPath = path.join(dir, name);
+  const walk = (currentDir, relativePrefix = "") =>
+    readdirSync(currentDir, { withFileTypes: true }).flatMap((entry) => {
+      const fullPath = path.join(currentDir, entry.name);
+      const relativePath = relativePrefix ? path.join(relativePrefix, entry.name) : entry.name;
+
+      if (entry.isDirectory()) {
+        return walk(fullPath, relativePath);
+      }
+
+      if (!entry.name.endsWith(".md") && !entry.name.endsWith(".mdx")) {
+        return [];
+      }
+
       const content = readFileSync(fullPath, "utf8");
-      return { file: name, data: parseFrontmatter(content) };
+      return [{ file: relativePath, data: parseFrontmatter(content) }];
     });
+
+  return walk(dir);
 }
 
 function parseDateValue(value) {
@@ -153,13 +171,29 @@ function toTexorpdf(company, location) {
   return `\\subsection*{\\texorpdfstring{\n        \\textbf{${escapeLatex(company)}} \\hfill ${escapeLatex(location)}\n    }{\n        ${escapeLatex(company)} -- ${escapeLatex(location)}\n    }}`;
 }
 
+function normalizeCvSections(rawSections) {
+  if (!rawSections || typeof rawSections !== "object") {
+    return { ...defaultCvSections };
+  }
+
+  return {
+    leadership: typeof rawSections.leadership === "boolean" ? rawSections.leadership : defaultCvSections.leadership,
+    experience: typeof rawSections.experience === "boolean" ? rawSections.experience : defaultCvSections.experience,
+    skills: typeof rawSections.skills === "boolean" ? rawSections.skills : defaultCvSections.skills,
+    education: typeof rawSections.education === "boolean" ? rawSections.education : defaultCvSections.education,
+  };
+}
+
 function getProfileFromCvDataJson(strict) {
   const fallback = {
-    name: "Astro Lunar",
-    email: "your.email@example.com",
-    location: "Your City, Your Country",
-    linkedin: "https://www.linkedin.com/in/yourprofile",
-    github: "https://github.com/yourprofile",
+    profile: {
+      name: "Astro Lunar",
+      email: "your.email@example.com",
+      location: "Your City, Your Country",
+      linkedin: "https://www.linkedin.com/in/yourprofile",
+      github: "https://github.com/yourprofile",
+    },
+    cvSections: { ...defaultCvSections },
   };
 
   const failOrFallback = (message) => {
@@ -205,12 +239,17 @@ function getProfileFromCvDataJson(strict) {
     );
   }
 
+  const rawSections = parsed?.CV_SECTIONS ?? parsed?.["cv-sections"] ?? parsed?.cvSections;
+
   return {
-    name: profile.NAME,
-    email: profile.EMAIL,
-    location: profile.LOCATION,
-    linkedin: linkedinValue,
-    github: githubValue,
+    profile: {
+      name: profile.NAME,
+      email: profile.EMAIL,
+      location: profile.LOCATION,
+      linkedin: linkedinValue,
+      github: githubValue,
+    },
+    cvSections: normalizeCvSections(rawSections),
   };
 }
 
@@ -339,10 +378,10 @@ function buildDocument(strict, variant) {
     ? template.slice(0, template.indexOf(beginMarker))
     : template;
 
-  const profile = getProfileFromCvDataJson(strict);
+  const { profile, cvSections } = getProfileFromCvDataJson(strict);
   const workEntries = readCollection(workDir)
+    .filter((item) => item.file.startsWith(`${variant.id}/`))
     .map((item) => item.data)
-    .filter((entry) => entry.locale === variant.id)
     .sort(compareByStartDateDesc);
   const educationEntries = readCollection(educationDir)
     .map((item) => item.data)
@@ -374,6 +413,15 @@ function buildDocument(strict, variant) {
     .replace(/pdftitle=\{[^}]*\}/, `pdftitle={CV ${safeName}}`)
     .replace(/pdfauthor=\{[^}]*\}/, `pdfauthor={${safeName}}`);
 
+  const renderedSections = [
+    cvSections.leadership ? `\\section{${variant.sections.leadership}}\n${leadershipTex}` : "",
+    cvSections.experience ? `\\section{${variant.sections.experience}}\n${experienceTex}` : "",
+    cvSections.skills ? `\\section{${variant.sections.skills}}\n${skillsTex}` : "",
+    cvSections.education ? `\\section{${variant.sections.education}}\n${educationTex}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
   return `${patchedPreamble}
 \\begin{document}
 
@@ -389,17 +437,7 @@ function buildDocument(strict, variant) {
     \\href{${safeGithubUrl}}{${safeGithubLabel}}
 \\end{center}
 
-\\section{${variant.sections.leadership}}
-${leadershipTex}
-
-\\section{${variant.sections.experience}}
-${experienceTex}
-
-\\section{${variant.sections.skills}}
-${skillsTex}
-
-\\section{${variant.sections.education}}
-${educationTex}
+${renderedSections}
 
 \\end{document}
 `;

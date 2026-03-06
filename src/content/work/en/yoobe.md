@@ -1,5 +1,4 @@
 ---
-locale: "en"
 company: "Yoobe"
 role: "Full-Stack Web Developer"
 location: "Remote"

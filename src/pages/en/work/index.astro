@@ -9,7 +9,7 @@ const locale: Locale = "en";
 const t = useTranslations(locale);
 
 const collection = (await getCollection("work"))
-  .filter((entry) => entry.data.locale === locale)
+  .filter((entry) => entry.id.startsWith(`${locale}/`))
   .sort(
     (a, b) =>
       new Date(b.data.dateStart).valueOf() -

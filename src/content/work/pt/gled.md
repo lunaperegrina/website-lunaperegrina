@@ -1,5 +1,4 @@
 ---
-locale: "pt"
 company: "Gled International Education"
 role: "Full-Stack Web Developer"
 location: "Remoto"

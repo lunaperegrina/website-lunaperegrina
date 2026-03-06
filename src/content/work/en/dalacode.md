@@ -1,5 +1,4 @@
 ---
-locale: "en"
 company: "DalaCode"
 role: "Full-Stack Web Developer"
 location: "Remote"
