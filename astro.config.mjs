@@ -6,20 +6,25 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap()],
+
   i18n: {
     locales: ['en', 'pt'],
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
   },
 
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
