@@ -1,9 +1,7 @@
-```markdown
 ---
 title: "O adolescente que invadiu NASA e Pentágono"
 description: "A história de Jonathan James (c0mrade), o hacker de 15 anos que conseguiu acessar sistemas da NASA e do Departamento de Defesa dos EUA no final dos anos 90."
 date: "Aug 01 2023"
-tags: ["segurança", "hacking", "história da tecnologia", "cybersecurity"]
 ---
 
 # O adolescente que invadiu NASA e Pentágono
@@ -27,7 +25,7 @@ Desde muito cedo ele começou a:
 - estudar redes
 - testar vulnerabilidades
 
-Ele era exatamente o tipo de pessoa que passa horas tentando entender **como os sistemas funcionam — e como quebrá-los**.
+Ele era exatamente o tipo de pessoa que passa horas tentando entender **como os sistemas funcionam e como quebrá-los**.
 
 Segundo relatos da época, ele já programava e tinha familiaridade com linguagens como **C** ainda muito jovem.
 

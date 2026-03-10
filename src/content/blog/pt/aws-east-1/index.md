@@ -4,7 +4,7 @@ description: "Hoje vamos falar de uma região que, na prática, sustenta uma par
 date: "Jun 24 2023"
 ---
 
-Hoje vamos falar de uma região que, na prática, sustenta **uma parte enorme da internet nas costas** — e que já deixou muita gente sem **LoL, iFood e até banco** em alguns momentos.
+Hoje vamos falar de uma região que, na prática, sustenta **uma parte enorme da internet nas costas** e que já deixou muita gente sem **LoL, iFood e até banco** em alguns momentos.
 
 Ela: **AWS `us-east-1`**.
 
@@ -157,7 +157,7 @@ Na prática… nem sempre é o que acontece.
 
 A região **`us-east-1` (N. Virginia)** é uma das mais antigas da AWS.
 
-Por isso, muitas empresas começaram hospedando tudo nela — e **nunca migraram ou distribuíram corretamente depois**.
+Por isso, muitas empresas começaram hospedando tudo nela e **nunca migraram ou distribuíram corretamente depois**.
 
 Resultado:  
 uma quantidade absurda de serviços importantes depende dessa única região.
@@ -217,7 +217,7 @@ Sem isso, um problema localizado pode virar **um apagão digital em cadeia**.
 
 Grande parte da internet moderna depende de infraestrutura compartilhada.
 
-Plataformas como AWS tornaram possível escalar serviços globais — mas também criaram **dependências concentradas**.
+Plataformas como AWS tornaram possível escalar serviços globais mas também criaram **dependências concentradas**.
 
 E às vezes basta um problema em um único ponto para que milhões de usuários percebam algo simples:
 
