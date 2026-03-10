@@ -12,6 +12,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap()],
+  redirects: {
+    '/links': {
+      destination: '/pt/links',
+      status: 302,
+    },
+  },
 
   i18n: {
     locales: ['en', 'pt'],

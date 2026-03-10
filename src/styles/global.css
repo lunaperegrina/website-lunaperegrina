@@ -57,7 +57,7 @@
   }
 
   header {
-    @apply fixed top-0 left-0 right-0 z-50 py-5;
+    @apply fixed top-0 left-0 right-0 z-50 py-4 md:py-5;
     @apply bg-stone-100/75 dark:bg-black/25;
     @apply backdrop-blur-xs saturate-200;
   }
