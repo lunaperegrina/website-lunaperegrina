@@ -7,7 +7,8 @@
     "build:resume": "node scripts/generate-resume-pdf.mjs",
     "build": "npm run build:resume && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npx astro build && npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
