@@ -1,0 +1,27 @@
+---
+import Container from "@components/Container.astro";
+import LinksPageContent from "@components/LinksPageContent.astro";
+import { SITE } from "@consts";
+import { useTranslations, type Locale } from "@i18n/utils";
+import LinksLayout from "@layouts/LinksLayout.astro";
+import { socialLinksPage } from "@lib/links-data";
+
+const locale: Locale = "pt";
+const t = useTranslations(locale);
+
+const title = t("links.meta.title");
+const description = t("links.meta.description", { name: SITE.NAME });
+---
+
+<LinksLayout title={title} description={description} locale={locale}>
+  <Container>
+    <LinksPageContent
+      socialLinks={socialLinksPage.socialLinks}
+      projectLinks={socialLinksPage.projectLinks}
+      otherLinks={socialLinksPage.otherLinks}
+      role={t("links.role")}
+      bio={t("links.bio")}
+      projectsTitle={t("links.projects")}
+    />
+  </Container>
+</LinksLayout>

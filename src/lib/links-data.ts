@@ -44,6 +44,10 @@ export const socialLinks: SocialLinkItem[] = [
   },
 ];
 
+const socialLinksWithoutLinkedin: SocialLinkItem[] = socialLinks.filter(
+  (item) => item.icon !== "linkedin",
+);
+
 export const recommendLinks: LinkItem[] = [
   {
     label: "Monitor 4K LG baratinho",
@@ -100,3 +104,29 @@ export const otherLinks: LinkItem[] = [
   //   external: true,
   // },
 ];
+
+export type LinksPageData = {
+  socialLinks: SocialLinkItem[];
+  projectLinks: LinkItem[];
+  otherLinks: LinkItem[];
+};
+
+export const linkedinLinksPage: LinksPageData = {
+  socialLinks,
+  projectLinks,
+  otherLinks,
+};
+
+export const socialLinksPage: LinksPageData = {
+  socialLinks: socialLinksWithoutLinkedin,
+  projectLinks,
+  otherLinks: [
+    {
+      label: "🔒 Privacy",
+      description: "Conteúdo exclusivo no Privacy.",
+      href: "https://privacy.com.br/profile/lunaperegrina",
+      external: true,
+    },
+    ...otherLinks,
+  ],
+};
