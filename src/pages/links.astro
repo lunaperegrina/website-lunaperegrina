@@ -11,12 +11,36 @@ const t = useTranslations(locale);
 
 const title = t("links.meta.title");
 const description = t("links.meta.description", { name: SITE.NAME });
+const socialLinksForLinksPage = socialLinksPage.socialLinks.map((item) =>
+  item.icon === "twitter"
+    ? { ...item, href: "https://twitter.com/lunaperegrinaaa" }
+    : item,
+);
 ---
 
 <LinksLayout title={title} description={description} locale={locale}>
   <Container>
+    <section class="mb-6 rounded-xl border-4 border-red-900 bg-red-600 p-5 text-white shadow-lg shadow-red-900/45">
+      <p class="text-xs font-black tracking-[0.22em] uppercase">AVISO MUITO IMPORTANTE</p>
+      <p class="mt-3 text-lg font-extrabold leading-tight">
+        PERDI MINHA CONTA ANTIGA NO TWITTER/X:
+        <span class="font-black">@lunaperegrinaa</span>
+      </p>
+      <p class="mt-2 text-sm font-semibold">
+        Minha conta oficial agora é
+        <span class="font-black">@lunaperegrinaaa</span>.
+      </p>
+      <a
+        href="https://twitter.com/lunaperegrinaaa"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 inline-flex rounded-md border-2 border-white bg-black px-4 py-2 text-sm font-extrabold uppercase tracking-[0.08em] text-white transition-colors duration-150 hover:bg-white hover:text-black"
+      >
+        IR PARA MINHA NOVA CONTA
+      </a>
+    </section>
     <LinksPageContent
-      socialLinks={socialLinksPage.socialLinks}
+      socialLinks={socialLinksForLinksPage}
       projectLinks={socialLinksPage.projectLinks}
       otherLinks={socialLinksPage.otherLinks}
       role={t("links.role")}
