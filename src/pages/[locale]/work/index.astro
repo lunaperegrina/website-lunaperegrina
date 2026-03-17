@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { locales, useTranslations, type Locale } from "@i18n/utils";
+import { dateRange } from "@lib/utils";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const t = useTranslations(locale);
+
+const collection = (await getCollection("work"))
+  .filter((entry) => entry.id.startsWith(`${locale}/`))
+  .sort(
+    (a, b) =>
+      new Date(b.data.dateStart).valueOf() -
+      new Date(a.data.dateStart).valueOf(),
+  );
+---
+
+<PageLayout title={t("work.meta.title")} description={t("work.meta.description")} locale={locale}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate font-semibold text-black dark:text-white">
+        {t("work.heading")}
+      </div>
+      <ul class="flex flex-col">
+        {
+          collection.map((entry) => (
+            <li class="animate border-b border-black/10 dark:border-white/10 py-4 last:border-0">
+              <div class="text-sm opacity-75">
+                {dateRange(entry.data.dateStart, locale, entry.data.dateEnd)}
+              </div>
+              <div class="font-semibold text-black dark:text-white">
+                {entry.data.company}
+              </div>
+              <div class="text-sm opacity-75">
+                {entry.data.role} · {entry.data.location}
+              </div>
+              <ul class="mt-2 list-disc pl-5 space-y-1">
+                {entry.data.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</PageLayout>
