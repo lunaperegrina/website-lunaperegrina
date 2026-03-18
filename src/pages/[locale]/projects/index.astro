@@ -2,10 +2,14 @@
 import { getCollection } from "astro:content";
 import ArrowCard from "@components/ArrowCard.astro";
 import Container from "@components/Container.astro";
-import { useTranslations, type Locale } from "@i18n/utils";
+import { locales, useTranslations, type Locale } from "@i18n/utils";
 import PageLayout from "@layouts/PageLayout.astro";
 
-const locale: Locale = "pt";
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
 const t = useTranslations(locale);
 
 const projects = (await getCollection("projects"))

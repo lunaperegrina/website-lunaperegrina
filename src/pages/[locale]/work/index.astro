@@ -2,10 +2,14 @@
 import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import { useTranslations, type Locale } from "@i18n/utils";
+import { locales, useTranslations, type Locale } from "@i18n/utils";
 import { dateRange } from "@lib/utils";
 
-const locale: Locale = "pt";
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
 const t = useTranslations(locale);
 
 const collection = (await getCollection("work"))

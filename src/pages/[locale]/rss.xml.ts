@@ -1,16 +1,17 @@
+import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
-import { toLocalizedPath, useTranslations } from "@i18n/utils";
+import { locales, toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
 import { isEntryInLocale, stripLocalePrefixFromSlug } from "@lib/content-localization";
 
-const locale = "en" as const;
-const t = useTranslations(locale);
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
 
-type Context = {
-  site: string;
-};
+export async function GET(context: APIContext) {
+  const locale = context.params.locale as Locale;
+  const t = useTranslations(locale);
 
-export async function GET(context: Context) {
   const blog = (await getCollection("blog")).filter(
     (post) => !post.data.draft && isEntryInLocale(post.id, locale),
   );
@@ -25,7 +26,7 @@ export async function GET(context: Context) {
   return rss({
     title: t("rss.title"),
     description: t("rss.description"),
-    site: context.site,
+    site: context.site!.toString(),
     items: items.map((item) => {
       const slug = item.collection === "blog"
         ? stripLocalePrefixFromSlug(item.slug, locale)

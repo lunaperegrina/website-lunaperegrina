@@ -4,27 +4,28 @@ import BackToPrev from "@components/BackToPrev.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import { toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
+import { locales, toLocalizedPath, useTranslations, type Locale } from "@i18n/utils";
 import { isEntryInLocale, stripLocalePrefixFromSlug } from "@lib/content-localization";
 import { readingTime } from "@lib/utils";
 
-const locale: Locale = "en";
-const t = useTranslations(locale);
-
 export async function getStaticPaths() {
-  const blogLocale: Locale = "en";
-  const posts = (await getCollection("blog"))
-    .filter((post) => !post.data.draft && isEntryInLocale(post.id, blogLocale))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return posts.map((post) => ({
-    params: { slug: stripLocalePrefixFromSlug(post.slug, blogLocale) },
-    props: post,
-  }));
+  const paths = [];
+  for (const locale of locales) {
+    const posts = (await getCollection("blog"))
+      .filter((post) => !post.data.draft && isEntryInLocale(post.id, locale))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    for (const post of posts) {
+      paths.push({
+        params: { locale, slug: stripLocalePrefixFromSlug(post.slug, locale) },
+        props: { post, locale },
+      });
+    }
+  }
+  return paths;
 }
 
-type Props = CollectionEntry<"blog">;
-
-const post = Astro.props;
+const { post, locale } = Astro.props as { post: CollectionEntry<"blog">; locale: Locale };
+const t = useTranslations(locale);
 const { Content } = await post.render();
 ---
 
