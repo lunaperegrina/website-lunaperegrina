@@ -1,4 +1,4 @@
-# Luna Peregrina - site pessoal + currículo ATS
+# Site pessoal + currículo ATS
 
 Este repositório é o código do meu site pessoal. Ele reúne minha página inicial, links, posts, projetos e experiências em um site estático feito com [Astro](https://astro.build).
 
