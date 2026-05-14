@@ -4,6 +4,58 @@ Este repositório é o código do meu site pessoal. Ele reúne minha página ini
 
 você pode clonar o projeto, trocar as minhas informações pelas suas e criar o seu próprio site pessoal com geração de currículo em PDF, em português e inglês, a partir dos mesmos dados do conteúdo.
 
+## Pré-requisitos
+
+Para rodar o site localmente, você precisa ter:
+
+- [Node.js](https://nodejs.org/) 20.19 ou superior, com `npm`.
+
+Para gerar os PDFs do currículo, você também precisa ter um compilador LaTeX disponível no terminal. O caminho recomendado é instalar o [Tectonic](https://tectonic-typesetting.github.io/book/latest/installation/), porque ele é mais leve que uma distribuição LaTeX completa e o script já procura pelo comando `tectonic`.
+
+Instale o Tectonic conforme seu sistema:
+
+### macOS
+
+Com Homebrew:
+
+```sh
+brew install tectonic
+```
+
+### Windows
+
+No PowerShell:
+
+```powershell
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://drop-ps1.fullyjustified.net'))
+```
+
+Depois mova o `tectonic.exe` gerado para uma pasta que esteja no `PATH`, para que o comando `tectonic` funcione em qualquer terminal.
+
+### Linux
+
+Em distribuições Unix-like, incluindo Linux, você pode usar o instalador oficial:
+
+```sh
+curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+sudo install -m 755 tectonic /usr/local/bin/tectonic
+```
+
+No Arch Linux, também dá para instalar pelo pacote oficial:
+
+```sh
+sudo pacman -S tectonic
+```
+
+Em qualquer sistema, confirme a instalação com:
+
+```sh
+tectonic --version
+```
+
+Se você preferir usar uma distribuição LaTeX completa, o script também aceita `pdflatex`, disponível em ferramentas como MacTeX, TeX Live ou MiKTeX.
+
 ## O que vem pronto
 
 - Site pessoal rápido, estático e simples de manter.
@@ -25,7 +77,7 @@ git clone <url-do-repositorio>
 cd website-lunaperegrina
 ```
 
-2. Instale as dependências.
+2. Instale as dependências do projeto.
 
 ```sh
 npm install
@@ -87,7 +139,7 @@ Para gerar currículo e site de produção juntos:
 npm run build
 ```
 
-> Para gerar os PDFs, você precisa ter um compilador LaTeX instalado, como `pdflatex` ou `tectonic`. Se não tiver, o build do site continua funcionando, mas a geração dos PDFs pode ser ignorada ou falhar se o modo estrito estiver ativo.
+> Se `tectonic` ou `pdflatex` não estiver disponível no terminal, o script pula a geração dos PDFs. Para transformar isso em erro de build, rode com `RESUME_PDF_STRICT=1`.
 
 ## Comandos úteis
 

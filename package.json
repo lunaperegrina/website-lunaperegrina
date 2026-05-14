@@ -2,6 +2,9 @@
   "name": "website-luna-peregrina",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build:resume": "node scripts/generate-resume-pdf.mjs",
