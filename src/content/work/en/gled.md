@@ -7,7 +7,7 @@ dateEnd: "current"
 type: "Full-time"
 highlights:
   - "Developed and maintained modern web applications using Next.js (App Router) and TypeScript, ensuring high performance, scalability, and excellent user experience."
-  - "Designed and developed robust REST APIs using NestJS, Fastify, and Express, applying SOLID principles, design patterns, and scalable microservices-oriented architecture."
+  - "Designed and developed robust REST APIs using Express, NestJS, Fastify, Hono and Elysia, applying SOLID principles, design patterns, and scalable microservices-oriented architecture."
   - "Developed integrations between services and educational platforms through custom APIs and unified authentication systems."
   - "Implemented responsive and accessible interfaces using Shadcn/ui and Tailwind CSS, focusing on componentization and visual consistency."
   - "Modeled and managed relational (PostgreSQL) and non-relational (MongoDB) databases, optimizing queries and designing efficient schemas."

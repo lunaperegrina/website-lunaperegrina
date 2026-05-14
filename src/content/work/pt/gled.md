@@ -7,7 +7,7 @@ dateEnd: "current"
 type: "Tempo integral"
 highlights:
   - "Desenvolvimento e manutenção de aplicações web modernas utilizando Next.js (App Router) e TypeScript, garantindo alta performance, escalabilidade e excelente experiência do usuário."
-  - "Criação e desenvolvimento de APIs REST robustas utilizando NestJS, Fastify e Express, aplicando princípios SOLID, padrões de projeto e arquitetura escalável orientada a microsserviços."
+  - "Criação e desenvolvimento de APIs REST robustas utilizando Express, NestJS, Fastify, Hono e Elysia, aplicando princípios SOLID, padrões de projeto e arquitetura escalável orientada a microsserviços."
   - "Desenvolvimento de integrações entre serviços e plataformas educacionais através de APIs customizadas e sistemas de autenticação unificada."
   - "Implementação de interfaces responsivas e acessíveis utilizando Shadcn/ui e Tailwind CSS, com foco em componentização e consistência visual."
   - "Modelagem e gerenciamento de bancos de dados relacionais (PostgreSQL) e não-relacionais (MongoDB), realizando otimização de queries e estruturação eficiente de schemas."
