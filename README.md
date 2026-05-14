@@ -1,62 +1,115 @@
-# Astro Starter Kit: Blog
+# Luna Peregrina - site pessoal + currículo ATS
+
+Este repositório é o código do meu site pessoal. Ele reúne minha página inicial, links, posts, projetos e experiências em um site estático feito com [Astro](https://astro.build).
+
+você pode clonar o projeto, trocar as minhas informações pelas suas e criar o seu próprio site pessoal com geração de currículo em PDF, em português e inglês, a partir dos mesmos dados do conteúdo.
+
+## O que vem pronto
+
+- Site pessoal rápido, estático e simples de manter.
+- Conteúdo em Markdown/MDX para posts, projetos, experiências, habilidades, educação e liderança.
+- Dados centrais de perfil em `src/data/cv-data.json`.
+- Currículos gerados automaticamente em PDF:
+  - `public/luna-peregrina-cv-pt.pdf`
+  - `public/luna-peregrina-cv-en.pdf`
+- Templates em LaTeX pensados para um currículo limpo e amigável para ATS.
+- Suporte a rotas em português e inglês.
+- RSS, sitemap, SEO básico e metadados OpenGraph.
+
+## Como usar como base para o seu site
+
+1. Clone este repositório.
 
 ```sh
-npm create astro@latest -- --template blog
+git clone <url-do-repositorio>
+cd website-lunaperegrina
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2. Instale as dependências.
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```sh
+npm install
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+3. Rode o projeto localmente.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+npm run dev
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+O site ficará disponível em `http://localhost:4321`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+4. Troque as informações da Luna pelas suas.
 
-## 🧞 Commands
+Comece por estes arquivos:
 
-All commands are run from the root of the project, from a terminal:
+| Arquivo/pasta | O que editar |
+| :-- | :-- |
+| `src/data/cv-data.json` | Nome, e-mail, localização, redes sociais e seções que aparecem no currículo |
+| `src/content/work/` | Experiências profissionais em português e inglês |
+| `src/content/skills/` | Habilidades técnicas, idiomas e outras competências |
+| `src/content/education/` | Formação, cursos e certificações |
+| `src/content/leadership/` | Atividades de liderança, comunidade ou voluntariado |
+| `src/content/projects/` | Projetos exibidos no site |
+| `src/content/blog/` | Posts do blog |
+| `src/i18n/ui.ts` | Textos fixos da interface |
+| `src/consts.ts` | Configurações gerais do site |
+| `astro.config.mjs` | URL final do seu site em `site` |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+5. Ajuste os arquivos do currículo, se quiser mudar o visual.
 
-## 👀 Want to learn more?
+Os templates ficam em:
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `src/lib/latex/curriculo.tex`
+- `src/lib/latex/resume.tex`
 
-## Credit
+Na maior parte dos casos, você só precisa mudar os dados e conteúdos Markdown. Mexa nos templates apenas se quiser alterar a estrutura visual do PDF.
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+## Gerando o currículo
+
+O currículo é montado a partir de:
+
+- `src/data/cv-data.json`
+- `src/content/work/`
+- `src/content/skills/`
+- `src/content/education/`
+- `src/content/leadership/`
+
+Para gerar os PDFs:
+
+```sh
+npm run build:resume
+```
+
+Para gerar currículo e site de produção juntos:
+
+```sh
+npm run build
+```
+
+> Para gerar os PDFs, você precisa ter um compilador LaTeX instalado, como `pdflatex` ou `tectonic`. Se não tiver, o build do site continua funcionando, mas a geração dos PDFs pode ser ignorada ou falhar se o modo estrito estiver ativo.
+
+## Comandos úteis
+
+| Comando | Ação |
+| :-- | :-- |
+| `npm install` | Instala as dependências |
+| `npm run dev` | Inicia o servidor local em `localhost:4321` |
+| `npm run build:resume` | Gera os PDFs do currículo |
+| `npm run build` | Gera currículo e site de produção em `dist/` |
+| `npm run preview` | Visualiza o build localmente |
+| `npm run deploy` | Faz build e deploy via Wrangler |
+
+## Dicas para personalizar bem
+
+- Mantenha o currículo objetivo: ATS costuma lidar melhor com texto claro, títulos previsíveis e pouca decoração.
+- Escreva experiências com impacto, tecnologia usada e resultado quando possível.
+- Crie as versões em português e inglês do conteúdo profissional dentro de `src/content/work/pt` e `src/content/work/en`.
+- Depois de trocar o nome do projeto, atualize também `package.json`, `wrangler.jsonc` e os caminhos dos PDFs se quiser remover qualquer referência à Luna.
+- Antes de publicar, rode `npm run build` para verificar se site e currículo continuam gerando corretamente.
+
+## Créditos
+
+Este site nasceu a partir do template de blog do Astro e evoluiu para o meu site pessoal com geração de currículo.
+
+O tema original se inspira no [Bear Blog](https://github.com/HermanMartinus/bearblog/), e os templates LaTeX de currículo referenciam o projeto [resume-template](https://github.com/celiobjunior/resume-template).
