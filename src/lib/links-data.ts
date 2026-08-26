@@ -120,14 +120,6 @@ export const linkedinLinksPage: LinksPageData = {
 export const socialLinksPage: LinksPageData = {
   socialLinks: socialLinksWithoutLinkedin,
   projectLinks,
-  otherLinks: [
-    {
-      label: "🔒 Privacy",
-      description: "Conteúdo exclusivo no Privacy.",
-      href: "https://privacy.com.br/profile/lunaperegrina",
-      external: true,
-    },
-    ...otherLinks,
-  ],
+  otherLinks,
 };
 
