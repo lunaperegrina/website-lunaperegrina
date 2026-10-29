@@ -11,13 +11,18 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props as { locale: Locale };
 const t = useTranslations(locale);
+const endDateValue = (value: Date | string) =>
+  typeof value === "string" && /^(current|present|atual)$/i.test(value)
+    ? Number.POSITIVE_INFINITY
+    : new Date(value).valueOf();
 
 const collection = (await getCollection("work"))
   .filter((entry) => entry.id.startsWith(`${locale}/`))
   .sort(
     (a, b) =>
       new Date(b.data.dateStart).valueOf() -
-      new Date(a.data.dateStart).valueOf(),
+        new Date(a.data.dateStart).valueOf() ||
+      endDateValue(b.data.dateEnd) - endDateValue(a.data.dateEnd),
   );
 ---
 

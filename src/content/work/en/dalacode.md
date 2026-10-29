@@ -1,6 +1,6 @@
 ---
 company: "DalaCode"
-role: "Full-Stack Web Developer"
+role: "Full Stack Web Developer"
 location: "Remote"
 dateStart: "2023-04-01"
 dateEnd: "2023-08-01"

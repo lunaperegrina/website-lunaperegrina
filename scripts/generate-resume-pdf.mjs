@@ -40,6 +40,13 @@ const pdfVariants = [
     outputPdfPath: path.join(root, "public/luna-peregrina-cv-pt.pdf"),
     dateLocale: "pt-BR",
     presentLabel: "Atual",
+    skillsLabels: {
+      Technical: "Técnicas",
+      Languages: "Idiomas",
+      "Portuguese (Native)": "Português (Nativo)",
+      "English (Intermediate)": "Inglês (Intermediário)",
+      "Spanish (Fluent)": "Espanhol (Fluente)",
+    },
     sections: {
       leadership: "Atividades de Liderança",
       experience: "Experiência",
@@ -139,13 +146,20 @@ function compareByStartDateDesc(a, b) {
   const bDate = parseDateValue(b.dateStart);
   const aMs = aDate ? aDate.getTime() : 0;
   const bMs = bDate ? bDate.getTime() : 0;
-  return bMs - aMs;
+  const startDateDifference = bMs - aMs;
+  if (startDateDifference !== 0) return startDateDifference;
+
+  const aEndDate = parseDateValue(a.dateEnd);
+  const bEndDate = parseDateValue(b.dateEnd);
+  const aEndMs = aEndDate ? aEndDate.getTime() : Number.POSITIVE_INFINITY;
+  const bEndMs = bEndDate ? bEndDate.getTime() : Number.POSITIVE_INFINITY;
+  return bEndMs - aEndMs;
 }
 
 function formatMonthYear(value, variant) {
   const date = parseDateValue(value);
   if (!date) return variant.presentLabel;
-  return new Intl.DateTimeFormat(variant.dateLocale, { month: "short", year: "numeric" }).format(date);
+  return new Intl.DateTimeFormat(variant.dateLocale, { month: "short", year: "numeric", timeZone: "UTC" }).format(date);
 }
 
 function formatDateRange(start, end, variant) {
@@ -156,6 +170,8 @@ function escapeLatex(value) {
   const str = String(value ?? "");
   return str
     .replace(/\\/g, "\\textbackslash{}")
+    .replace(/—/g, "---")
+    .replace(/–/g, "--")
     .replace(/&/g, "\\&")
     .replace(/%/g, "\\%")
     .replace(/\$/g, "\\$")
@@ -353,13 +369,14 @@ function buildLeadershipSection(entries, variant) {
     .join("\n\n");
 }
 
-function buildSkillsSection(entries) {
+function buildSkillsSection(entries, variant) {
   if (!entries.length) return "";
 
+  const localize = (value) => variant.skillsLabels?.[value] ?? value;
   const items = entries
     .map((entry) => {
-      const list = entry.items.map((value) => escapeLatex(value)).join(", ");
-      const category = entry.category;
+      const list = entry.items.map((value) => escapeLatex(localize(value))).join(", ");
+      const category = localize(entry.category);
       return `    \\item \\textbf{${escapeLatex(category)}:} ${list}`;
     })
     .join("\n");
@@ -400,7 +417,7 @@ function buildDocument(strict, variant) {
   const experienceTex = buildExperienceSection(workEntries, variant);
   const educationTex = buildEducationSection(educationEntries, variant);
   const leadershipTex = buildLeadershipSection(leadershipEntries, variant);
-  const skillsTex = buildSkillsSection(skillsEntries);
+  const skillsTex = buildSkillsSection(skillsEntries, variant);
 
   const safeName = escapeLatex(profile.name);
   const safeEmail = escapeLatex(profile.email);

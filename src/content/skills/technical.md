@@ -23,6 +23,8 @@ items:
   - "K6"
   - "React Native"
   - "Expo"
+  - "Capacitor"
+  - "Firebase"
   - "PostgreSQL"
   - "MongoDB"
   - "Prisma"

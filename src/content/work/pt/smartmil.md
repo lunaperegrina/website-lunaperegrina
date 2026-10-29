@@ -1,0 +1,27 @@
+---
+company: "smartMIL"
+role: "CTO"
+location: "Remoto"
+dateStart: "2026-06-01"
+dateEnd: "current"
+type: "Tempo integral"
+highlights:
+  - "Fundação técnica e liderança da plataforma Smartmil — clube de benefícios, marketplace e carteira de pontos em um monorepo TypeScript (React/Next, Node/Hono, PostgreSQL/Drizzle)."
+  - "Defini a arquitetura end-to-end (web, mobile, APIs e infra em cloud) e a matriz de permissões RBAC multi-tenant."
+  - "Implementei o motor financeiro: PIX recorrente, assinaturas com ciclo de vida completo — trial, upgrade, downgrade, estorno — cashback e carteira com ledger auditável."
+  - "Validei capacidade e estabilidade com testes de carga nas rotas críticas antes dos lançamentos."
+  - "Integrei parceiros de afiliados e marketplaces externos, com catálogo sincronizado automaticamente."
+  - "Lidero a engenharia: code review, roadmap técnico e cultura de testes (unitários + e2e com Playwright)."
+  - "Estabeleci a engenharia de plataforma: CI/CD, migrations zero-downtime e observabilidade."
+tools:
+  - "TypeScript"
+  - "React"
+  - "Next.js"
+  - "Node"
+  - "Hono"
+  - "PostgreSQL"
+  - "DrizzleORM"
+  - "React Native"
+  - "CI/CD"
+  - "Playwright"
+---

@@ -1,15 +1,14 @@
 ---
 company: "Yoobe"
-role: "Full-Stack Web Developer"
+role: "Pleno Full Stack Web Developer"
 location: "Remoto"
 dateStart: "2023-09-01"
 dateEnd: "2025-02-01"
 type: "Tempo integral"
 highlights:
-  - "Desenvolvimento de novos projetos utilizando tecnologias como Next.js e NestJS."
-  - "Correcao de bugs e implementacao de novas features em aplicacoes web escritas em Next.js."
-  - "Contato constante com responsaveis de outros setores para melhor compreensao das regras de negocio da empresa."
-  - "Uso continuo de sistemas de versionamento para maior organizacao do trabalho em equipe."
+  - "Entreguei features e novos projetos em Next.js/NestJS para SaaS em produção."
+  - "Ponte entre engenharia e negócio — levantamento direto com stakeholders dos outros setores."
+  - "Manutenção evolutiva com versionamento (Git) e revisão em equipe."
 tools:
   - "TypeScript"
   - "Next.js"
@@ -18,4 +17,5 @@ tools:
   - "Ant Design"
   - "Shadcn/ui"
   - "PostgreSQL"
+  - "Prisma"
 ---
