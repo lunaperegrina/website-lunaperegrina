@@ -2,7 +2,7 @@
 company: "Autônomo"
 role: "Freelancer"
 location: "Remoto"
-dateStart: "2022-07-01"
+dateStart: "2022-04-01"
 dateEnd: "2023-04-01"
 type: "Autônomo"
 highlights:

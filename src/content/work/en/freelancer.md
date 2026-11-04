@@ -2,7 +2,7 @@
 company: "Self-employed"
 role: "Freelancer"
 location: "Remote"
-dateStart: "2022-07-01"
+dateStart: "2022-04-01"
 dateEnd: "2023-04-01"
 type: "Self-employed"
 highlights:

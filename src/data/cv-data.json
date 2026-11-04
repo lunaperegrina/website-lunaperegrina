@@ -2,7 +2,7 @@
   "PROFILE": {
     "NAME": "Luna Peregrina",
     "EMAIL": "lunaperegrina.contato@proton.me",
-    "LOCATION": "Bahia, Brazil",
+    "LOCATION": "Porto Alegre, Rio Grande do Sul, Brazil",
     "SOCIALS": {
       "TWITTER": "https://twitter.com/lunaperegrinaa",
       "GITHUB": "https://github.com/lunaperegrina",
@@ -13,6 +13,6 @@
     "leadership": false,
     "experience": true,
     "skills": true,
-    "education": false
+    "education": true
   }
 }

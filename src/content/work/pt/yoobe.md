@@ -7,7 +7,7 @@ dateEnd: "2025-02-01"
 type: "Tempo integral"
 highlights:
   - "Entreguei features e novos projetos em Next.js/NestJS para SaaS em produção."
-  - "Ponte entre engenharia e negócio — levantamento direto com stakeholders dos outros setores."
+  - "Atuei como ponte entre engenharia e negócio, levantando necessidades diretamente com stakeholders de outras áreas."
   - "Manutenção evolutiva com versionamento (Git) e revisão em equipe."
 tools:
   - "TypeScript"
