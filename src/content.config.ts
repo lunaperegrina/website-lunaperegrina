@@ -29,7 +29,9 @@ const education = defineCollection({
 	type: "content",
 	schema: z.object({
 		institution: z.string(),
+		institutionEn: z.string().optional(),
 		degree: z.string(),
+		degreeEn: z.string().optional(),
 		location: z.string(),
 		dateStart: z.coerce.date(),
 		dateEnd: z.union([z.coerce.date(), z.string()]),

@@ -342,8 +342,10 @@ function buildExperienceSection(entries, variant) {
 function buildEducationSection(entries, variant) {
   return entries
     .map((entry) => {
-      const title = toTexorpdf(entry.institution, entry.location);
-      const subtitle = `\\textit{${escapeLatex(entry.degree)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd, variant))}}`;
+      const institution = variant.id === "en" ? entry.institutionEn ?? entry.institution : entry.institution;
+      const degree = variant.id === "en" ? entry.degreeEn ?? entry.degree : entry.degree;
+      const title = toTexorpdf(institution, entry.location);
+      const subtitle = `\\textit{${escapeLatex(degree)} \\hfill ${escapeLatex(formatDateRange(entry.dateStart, entry.dateEnd, variant))}}`;
       const highlights = Array.isArray(entry.highlights) ? entry.highlights : [];
       const bullets = highlights.length
         ? `\n    \\begin{itemize}\n${highlights.map((item) => `        \\item ${escapeLatex(item)}`).join("\n")}\n    \\end{itemize}`
